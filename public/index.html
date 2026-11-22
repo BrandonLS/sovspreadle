@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spreadle: guess the country from its bond yields</title>
+<meta name="description" content="A daily game: five 10-year government bond yield charts, five coupons each. Guess the country, the year, or who paid more to borrow.">
+<meta name="theme-color" content="#1b2a66">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Spreadle: guess the country from its bond yields">
+<meta property="og:description" content="Five bond charts a day. Spend your coupons wisely and earn your credit rating.">
+<link rel="canonical" href="https://spreadle.example/">
+<meta property="og:url" content="https://spreadle.example/">
+<meta property="og:image" content="https://spreadle.example/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <pattern id="hatch" patternUnits="userSpaceOnUse" width="3.4" height="3.4" patternTransform="rotate(35)"><rect width="1.15" height="3.4" class="hl"/></pattern>
+  <pattern id="hatchR" patternUnits="userSpaceOnUse" width="3.4" height="3.4" patternTransform="rotate(-35)"><rect width="1.15" height="3.4" class="hlr"/></pattern>
+  <g id="bullShape">
+    <path d="M28 50 C28 38 38 32 54 31 C66 30 76 26 84 18 C92 11 106 12 114 20 C120 26 124 32 130 38 C138 44 146 54 148 64 C150 72 144 77 137 75 L128 72 C123 74 118 73 114 70 L117 76 L124 92 L114 92 L105 74 L101 73 L101 92 L91 92 L90 73 C79 75 66 75 55 73 L52 78 L45 92 L36 92 L41 72 C36 70 32 66 31 62 L28 92 L20 92 L24 63 C26 58 27 54 28 50 Z"/>
+    <path d="M126 40 C134 38 142 34 146 26 C149 20 148 14 144 10 C152 14 154 24 150 32 C146 40 138 46 130 48 Z"/>
+    <path d="M120 36 L112 38 L118 31 Z"/>
+  </g>
+  <symbol id="bull" viewBox="0 0 160 100">
+    <path class="m-ol" d="M114 34 C116 28 120 22 126 20 C124 26 124 30 125 36 Z" style="stroke-width:2"/>
+    <use href="#bullShape" class="m-ol"/><use href="#bullShape" class="m-bg"/><use href="#bullShape" class="m-ht"/>
+    <path class="m-ol" d="M30 46 C20 42 14 32 16 20" style="stroke-width:2.6"/><path class="m-ol" d="M16 20 l-4 -6 M16 20 l2 -7 M16 20 l-6 -2" style="stroke-width:2"/>
+    <circle class="m-eye" cx="135" cy="51" r="3.2"/><circle class="m-dot" cx="136" cy="51.5" r="1.6"/>
+    <circle class="m-dot" cx="144" cy="67" r="1.4"/>
+    <path class="m-ln" d="M98 16 C104 32 104 50 96 66 M62 32 C70 42 72 58 66 72 M120 44 C126 54 126 62 121 69"/>
+    <path class="m-ln" d="M8 93 H152 M14 97 H40 M60 97 H100 M118 97 H146" style="opacity:var(--gnd,1)"/>
+  </symbol>
+  <g id="bearShape">
+    <path d="M28 52 C30 44 38 40 48 38 C56 28 70 22 86 22 C104 22 120 26 130 36 C140 44 142 56 138 66 L134 70 L138 92 L127 92 L122 72 L116 72 L116 92 L106 92 L104 74 C92 76 80 76 70 74 L70 92 L58 92 L58 74 L54 74 L54 92 L42 92 L44 70 C38 68 34 66 30 64 L16 64 C10 64 8 60 12 57 Z"/>
+    <circle cx="46" cy="36" r="6"/>
+  </g>
+  <symbol id="bear" viewBox="0 0 160 100">
+    <use href="#bearShape" class="m-olr"/><use href="#bearShape" class="m-bg"/><use href="#bearShape" class="m-htr"/>
+    <circle class="m-eye" cx="36" cy="48" r="3"/><circle class="m-dotr" cx="35.5" cy="48.5" r="1.5"/>
+    <circle class="m-dotr" cx="11" cy="59" r="2"/>
+    <path class="m-lnr" d="M18 62 L28 60 M76 28 C70 40 70 56 76 70 M110 30 C116 42 116 58 110 70"/>
+    <path class="m-lnr" d="M42 92 l-3 3 M47 92 l-2 3 M54 92 l-3 3 M58 92 l-2 3 M64 92 l-1 3"/>
+    <path class="m-lnr" d="M8 93 H152 M20 97 H50 M70 97 H120" style="opacity:var(--gnd,1)"/>
+  </symbol>
+  <symbol id="coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10.5" class="c-o"/><circle cx="12" cy="12" r="7.2" class="c-i"/><path d="M12 7.5v9M9.6 9.6c0-1.2 1-1.8 2.4-1.8s2.4.6 2.4 1.6c0 2.4-4.8 1.4-4.8 4 0 1 1 1.8 2.4 1.8s2.4-.6 2.4-1.8" class="c-i"/></symbol>
+</defs></svg>
+
+<header class="top">
+  <button type="button" class="brand" id="homeBtn" aria-label="Spreadle home"><svg class="brand-bull" aria-hidden="true"><use href="#bull"/></svg><span>Spreadle</span></button>
+  <p class="session" id="sessionLbl"></p>
+  <div class="tools">
+    <button type="button" class="tool" id="sndBtn" aria-pressed="true" aria-label="Sound effects"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" class="ti"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" class="ts"/></svg></button>
+    <button type="button" class="tool" id="musBtn" aria-pressed="false" aria-label="Music"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l10-2v12" class="ts"/><circle cx="6.5" cy="18" r="2.5" class="ti"/><circle cx="16.5" cy="16" r="2.5" class="ti"/></svg></button>
+    <button type="button" class="tool" id="helpBtn" aria-label="How to play"><span aria-hidden="true">?</span></button>
+  </div>
+</header>
+
+<main class="layout">
+  <div class="play">
+    <section class="cert landing" id="landing" aria-labelledby="landTitle">
+      <div class="band"><svg class="guil" aria-hidden="true"></svg><h1 id="landTitle">Spreadle</h1></div>
+      <p class="land-sub">The daily bond session</p>
+      <div class="vignette" aria-hidden="true">
+        <svg class="mascot"><use href="#bull"/></svg>
+        <span class="vs">vs</span>
+        <svg class="mascot"><use href="#bear"/></svg>
+      </div>
+      <p class="land-tag">Five mystery bonds a day. Name the country behind each 10-year yield chart and climb the credit ratings from D to AAA.</p>
+      <ol class="slots" id="slots"></ol>
+      <div class="land-acts">
+        <button type="button" class="big" id="startBtn">Ring the opening bell</button>
+        <button type="button" class="ghost" id="unlimBtn">Play unlimited</button>
+      </div>
+      <p class="land-note" id="landNote"></p>
+    </section>
+
+    <section id="game" hidden aria-live="polite">
+      <div class="roundbar">
+        <ol class="pips" id="pips" aria-label="Bonds in this session"></ol>
+        <div class="tokens" id="tokens"></div>
+      </div>
+      <article class="cert card" id="card">
+        <div class="strip"><svg class="guil" aria-hidden="true"></svg></div>
+        <p class="kicker" id="kicker"></p>
+        <h1 class="q" id="question"></h1>
+        <dl class="facts" id="facts"></dl>
+        <div class="fig" id="fig"><svg id="chart" role="img" aria-label="Yield chart"></svg><div class="tip" id="tip"></div><div class="stamp" id="stamp" aria-hidden="true"></div></div>
+        <div class="hlq" id="hlq" hidden></div>
+      </article>
+
+      <div class="controls" id="controls">
+        <form id="form" autocomplete="off">
+          <label for="q" id="qLabel">Your guess</label>
+          <div class="row"><input id="q" aria-describedby="msg"><button id="go">Guess</button></div>
+          <p class="pool" id="pool"></p>
+          <ul class="sugg" id="sugg"></ul>
+          <p class="msg" id="msg" role="status"></p>
+        </form>
+        <div class="hints" id="hints"></div>
+      </div>
+
+      <ol class="coupons" id="coupons"></ol>
+
+      <section class="reveal" id="reveal" hidden>
+        <div class="rv-head">
+          <svg class="rv-mascot" id="rvMascot" aria-hidden="true"><use href="#bull"/></svg>
+          <div><p class="ep" id="rvEp"></p><h2 id="rvTitle"></h2><p class="delta" id="rvDelta"></p></div>
+        </div>
+        <ul class="rv-facts" id="rvFacts"></ul>
+        <div class="rv-acts">
+          <button type="button" class="big" id="nextBtn">Next bond</button>
+          <button type="button" class="ghost" id="histBtn" aria-expanded="false">Show full history</button>
+        </div>
+        <div class="hist" id="hist" hidden>
+          <p class="hist-h" id="histHead"></p>
+          <div class="fig full"><svg id="histChart" role="img" aria-label="Full history of this country's 10-year yield"></svg><div class="tip" id="histTip"></div></div>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <aside class="ladder" id="ladder" aria-label="Your credit rating today">
+    <h2 class="ld-h">Your rating</h2>
+    <ol class="rungs" id="rungs"></ol>
+    <p class="ld-note" id="ldNote"></p>
+  </aside>
+</main>
+
+<footer class="foot">Data from the OECD, the European Central Bank, the IMF, Japan's Ministry of Finance, Sveriges Riksbank and the Jordà-Schularick-Taylor Macrohistory Database. Dotted stretches in the full history are guess-only. A game, not investment advice. <a href="credits.html">Data and credits</a> <a href="privacy.html">Privacy</a></footer>
+
+<dialog class="dlg" id="endDlg" aria-labelledby="endRating">
+  <button type="button" class="x" data-close aria-label="Close">✕</button>
+  <div class="end-top">
+    <button type="button" class="end-mwrap" id="endMWrap" aria-label="Replay the finale"><svg class="end-mascot" id="endMascot" aria-hidden="true"><use href="#bull"/></svg><span class="roar-word" aria-hidden="true">Grrr!</span></button>
+    <div><p class="end-k" id="endKicker">Session closed</p><p class="end-rating" id="endRating"></p><p class="end-desc" id="endDesc"></p></div>
+  </div>
+  <ol class="end-log" id="endLog"></ol>
+  <pre class="share" id="sharePre"></pre>
+  <div class="dlg-acts"><button type="button" class="big" id="copyBtn">Copy result</button><button type="button" class="ghost" id="endUnlim">Play unlimited</button></div>
+  <p class="msg" id="copyMsg" role="status"></p>
+  <div class="stats" id="stats"></div>
+  <div class="dist" id="dist"></div>
+  <p class="next" id="nextIn"></p>
+</dialog>
+
+<dialog class="dlg" id="helpDlg" aria-labelledby="helpH">
+  <button type="button" class="x" data-close aria-label="Close">✕</button>
+  <h2 id="helpH">How to play</h2>
+  <ul class="help">
+    <li>Each day's session has five bonds, the same for everyone. Bond 1 is a famous episode from bond-market history; bond 4 is a twist round.</li>
+    <li>For most bonds you see ten years of a country's monthly 10-year government bond yield. Name the country. Each bond comes with 5 coupons: every guess clips one, and so does every hint.</li>
+    <li>After a wrong guess you see how far off the yield level is (in basis points: 100 bp = 1 percentage point) and how closely the two lines move together ("shape"). Your guess is drawn on the chart.</li>
+    <li>Points: 4 if you get it with your first coupon, 3 with your second, 2 with your third, 1 after that. Using all 5 without the answer scores nothing, but costs nothing either. In guess the year, the exact year scores full points and one year off scores 2 fewer. In higher or lower, each right answer is a point, and all three right is 4.</li>
+    <li>Your points, out of 20, set your rating, notch by notch like the agencies: 20 is AAA, 19 is AA+, 18 is AA, and so on down to D. BBB- (11 points) and above is investment grade.</li>
+    <li>Hints: the region, the closest twin (the country whose yields moved most like this one over the same years, drawn on the chart), or zooming out five years each side. Each hint costs a coupon, and the last coupon is always kept for a guess.</li>
+    <li>Twist rounds: <b>Spread</b> shows the gap over German yields instead of the yield. <b>Higher or lower</b> asks which of two countries yielded more in a given month, three times. <b>Guess the year</b> names the country and hides the dates: find the year of the marked point (a peak, a low or a famous moment). For famous moments, the "story" hint tells you what happened.</li>
+    <li>Unlimited mode plays random sessions that don't count toward your stats.</li>
+  </ul>
+</dialog>
+
+<script src="core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

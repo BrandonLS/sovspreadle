@@ -1,0 +1,292 @@
+[
+{
+"c": "GR",
+"s": "2005-01",
+"t": "The Greek debt crisis",
+"f": "In March 2012 Greece swapped its privately held bonds at a loss of more than half their face value: the biggest sovereign restructuring in history.",
+"ev": "2012-02",
+"q": "The marked point is the peak of the Greek debt crisis, just before the biggest sovereign restructuring in history."
+},
+{
+"c": "IT",
+"s": "2006-01",
+"t": "Italy's 2011 spread crisis",
+"f": "In November 2011 Italy's 10-year yield averaged 7.06%. Silvio Berlusconi resigned as prime minister that same month.",
+"ev": "2011-11",
+"q": "The marked point is the month Italy's yield passed 7% and its prime minister resigned."
+},
+{
+"c": "ES",
+"s": "2007-01",
+"t": "Spain and \"whatever it takes\"",
+"f": "Spain's 10-year yield averaged 6.79% in July 2012, the month Mario Draghi promised to do \"whatever it takes\" to save the euro.",
+"ev": "2012-07",
+"q": "The marked point is the month Mario Draghi promised to do \"whatever it takes\" to save the euro."
+},
+{
+"c": "PT",
+"s": "2005-01",
+"t": "Portugal's bailout",
+"f": "Portugal asked for an EU-IMF bailout in April 2011. Its 10-year yield peaked at 13.85% in January 2012.",
+"ev": "2012-01",
+"q": "The marked point is the peak after Portugal's EU-IMF bailout."
+},
+{
+"c": "IE",
+"s": "2006-01",
+"t": "Ireland's banking bust",
+"f": "Ireland's banking collapse ended in an €85bn EU-IMF rescue in November 2010. Its yield peaked at 12.45% in July 2011.",
+"ev": "2011-07",
+"q": "The marked point is the peak after Ireland's €85bn rescue."
+},
+{
+"c": "US",
+"s": "1976-01",
+"t": "The Volcker shock",
+"f": "Paul Volcker's Fed squeezed out inflation with record interest rates. The 10-year Treasury averaged 15.32% in September 1981, its all-time high.",
+"ev": "1981-09",
+"q": "The marked point is the 10-year Treasury's all-time high, under Paul Volcker's Fed."
+},
+{
+"c": "GB",
+"s": "1988-01",
+"t": "Black Wednesday",
+"f": "On 16 September 1992, \"Black Wednesday\", the pound crashed out of the European Exchange Rate Mechanism."
+},
+{
+"c": "SE",
+"s": "1988-01",
+"t": "Sweden's 500% defence",
+"f": "In September 1992 Sweden's central bank raised its overnight rate to 500% to defend the krona. It let the currency float two months later."
+},
+{
+"c": "IT",
+"s": "1991-03",
+"t": "The lira leaves the ERM",
+"f": "In September 1992 the lira was forced out of the European Exchange Rate Mechanism, the same week as the pound."
+},
+{
+"c": "US",
+"s": "1990-01",
+"t": "The great bond massacre",
+"f": "The Fed's surprise hikes in 1994 caused the \"great bond massacre\": the 10-year Treasury went from 5.75% in January to 7.96% in November.",
+"ev": "1994-11",
+"q": "The marked point is the top of the \"great bond massacre\"."
+},
+{
+"c": "JP",
+"s": "2011-01",
+"t": "Japan goes negative",
+"f": "The Bank of Japan announced negative interest rates in January 2016, effective in February. That month Japan's 10-year yield averaged below zero for the first time.",
+"ev": "2016-02",
+"q": "The marked point is the first month Japan's 10-year yield averaged below zero."
+},
+{
+"c": "JP",
+"s": "1989-01",
+"t": "Japan's bubble bursts",
+"f": "Japan's asset bubble burst in 1990. Its 10-year yield peaked at 8.03% in September 1990, then began a decades-long slide.",
+"ev": "1990-09",
+"q": "The marked point is the peak as Japan's asset bubble burst."
+},
+{
+"c": "CH",
+"s": "2011-01",
+"t": "The franc shock",
+"f": "In January 2015 the Swiss National Bank scrapped its cap on the franc. Swiss 10-year yields were negative in 59 of the 72 months from 2015 to 2020."
+},
+{
+"c": "DE",
+"s": "2012-01",
+"t": "The Bund below zero",
+"f": "Germany's 10-year yield first averaged below zero in June 2016, the month of the Brexit vote.",
+"ev": "2016-06",
+"q": "The marked point is the first month Germany's 10-year yield averaged below zero: the month of the Brexit vote."
+},
+{
+"c": "GB",
+"s": "2016-01",
+"t": "The mini-budget",
+"f": "The September 2022 \"mini-budget\" set off a gilt sell-off: the 10-year yield jumped from 2.33% in August to 3.50% in September, and the Bank of England stepped in.",
+"ev": "2022-09",
+"q": "The marked point is the gilt sell-off after the \"mini-budget\"."
+},
+{
+"c": "US",
+"s": "2014-01",
+"t": "Covid and the 1% floor",
+"f": "In March 2020 the 10-year Treasury averaged below 1% for the first time, at 0.87%.",
+"ev": "2020-03",
+"q": "The marked point is the first month the 10-year Treasury averaged below 1%."
+},
+{
+"c": "US",
+"s": "2016-01",
+"t": "Higher for longer",
+"f": "In October 2023 the 10-year Treasury averaged 4.80%, its highest monthly level since July 2007.",
+"ev": "2023-10",
+"q": "The marked point is the 10-year Treasury's highest monthly level since July 2007."
+},
+{
+"c": "FR",
+"s": "1978-01",
+"t": "Mitterrand's first years",
+"f": "After François Mitterrand won the presidency in May 1981, capital fled France and its 10-year yield passed 17%.",
+"ev": "1981-06",
+"q": "The marked point is when French yields passed 17% after a presidential election."
+},
+{
+"c": "NZ",
+"s": "1980-01",
+"t": "New Zealand's 1984 crisis",
+"f": "A currency crisis after New Zealand's 1984 snap election led to sweeping free-market reforms. Its yield peaked at 18.71% in May 1985.",
+"ev": "1985-05",
+"q": "The marked point is the peak after New Zealand's snap-election currency crisis."
+},
+{
+"c": "ZA",
+"s": "1980-01",
+"t": "South Africa's debt standstill",
+"f": "In September 1985 South Africa froze repayments on its foreign debt after banks pulled their credit lines."
+},
+{
+"c": "ZA",
+"s": "1994-01",
+"t": "The 1998 emerging-market rout",
+"f": "The 1998 emerging-market crisis hit the rand hard. South Africa's 10-year yield averaged 18.30% in September 1998.",
+"ev": "1998-09",
+"q": "The marked point is the peak of an emerging-market rout that hit the rand."
+},
+{
+"c": "CA",
+"s": "1976-01",
+"t": "Canada follows the Fed",
+"f": "Canadian rates followed the Fed up. Canada's 10-year yield peaked at 17.00% in September 1981.",
+"ev": "1981-09",
+"q": "The marked point is Canada's peak, as rates followed the Fed up."
+},
+{
+"c": "HU",
+"s": "2014-01",
+"t": "Hungary's inflation shock",
+"f": "Hungarian inflation passed 25% in early 2023, among the highest in the EU. Its 10-year yield peaked at 10.25% in October 2022.",
+"ev": "2022-10",
+"q": "The marked point is the peak of Hungary's inflation shock."
+},
+{
+"c": "PL",
+"s": "2001-01",
+"t": "Poland joins the EU",
+"f": "Poland joined the EU in 2004. Its 10-year yield fell from 11.86% in August 2001 to 4.72% in July 2005."
+},
+{
+"c": "GR",
+"s": "1997-06",
+"t": "Greece joins the euro",
+"f": "Greece adopted the euro in January 2001. By mid-2003 its 10-year yield was within 0.2 points of Germany's."
+},
+{
+"c": "IT",
+"s": "1995-01",
+"t": "Racing to join the euro",
+"f": "Italy's 10-year yield fell from 13.45% in March 1995 to below 5% by July 1998 as it raced to qualify for the euro."
+},
+{
+"c": "GB",
+"s": "1970-01",
+"t": "Britain's IMF crisis",
+"f": "In 1976 Britain borrowed $3.9bn from the IMF, then the largest loan the fund had ever made."
+},
+{
+"c": "IE",
+"s": "1978-01",
+"t": "Ireland's 1980s debt crisis",
+"f": "Ireland's 1980s debt crisis pushed its 10-year yield to 19.47% in February 1982.",
+"ev": "1982-02",
+"q": "The marked point is the peak of Ireland's 1980s debt crisis."
+},
+{
+"c": "NO",
+"s": "1985-01",
+"t": "Norway's oil price shock",
+"f": "Oil prices collapsed in 1986 and hit Norway hard: the krone was devalued by 12% in May 1986."
+},
+{
+"c": "FI",
+"s": "1988-01",
+"t": "Finland's depression",
+"f": "A banking crisis and the collapse of Soviet trade sank Finland's economy in 1991. The markka was floated in September 1992."
+},
+{
+"c": "IL",
+"s": "2001-01",
+"t": "Israel's 2002 squeeze",
+"f": "During the second intifada and a sliding shekel, Israel's 10-year yield reached 11.67% in October 2002. It peaked at 11.69% in February 2003.",
+"ev": "2002-10",
+"q": "The marked point is Israel's squeeze during the second intifada."
+},
+{
+"c": "MX",
+"s": "2002-01",
+"t": "Mexico in 2008",
+"f": "The 2008 financial crisis pushed Mexico's 10-year yield to 9.82% in November 2008.",
+"ev": "2008-11",
+"q": "The marked point is Mexico's yield during the global financial crisis."
+},
+{
+"c": "CL",
+"s": "2014-01",
+"t": "Chile's pension withdrawals",
+"f": "Chile's 2019 protests were followed by pension-fund withdrawals. Its 10-year yield rose from 2.70% in August 2019 to 6.34% in October 2021.",
+"ev": "2021-10",
+"q": "The marked point is the peak after Chile's pension-fund withdrawals."
+},
+{
+"c": "SI",
+"s": "2007-01",
+"t": "Slovenia's banks",
+"f": "Slovenia's yield peaked at 6.90% in December 2011. In 2013 it rescued its own banks and narrowly avoided an EU bailout.",
+"ev": "2011-12",
+"q": "The marked point is Slovenia's peak during the euro crisis."
+},
+{
+"c": "AU",
+"s": "1980-01",
+"t": "Australia floats",
+"f": "Australia floated its dollar in December 1983, ending decades of a managed exchange rate."
+},
+{
+"c": "US",
+"s": "1965-01",
+"t": "Nixon closes the gold window",
+"f": "Inflation rose with the Vietnam War. In August 1971 Richard Nixon ended the dollar's convertibility into gold."
+},
+{
+"c": "DE",
+"s": "1970-01",
+"t": "The first oil shock",
+"f": "The 1973 oil shock pushed German 10-year yields above 10% in 1974, peaking at 10.8%.",
+"ev": "1974-07",
+"q": "The marked point is Germany's peak after the first oil shock."
+},
+{
+"c": "CH",
+"s": "1973-01",
+"t": "The franc as a safe haven",
+"f": "Money poured into the franc in the late 1970s. In October 1978 the Swiss National Bank set a floor against the Deutsche Mark.",
+"ev": "1978-11",
+"q": "The marked point is the low as money poured into the Swiss franc."
+},
+{
+"c": "ES",
+"s": "1989-01",
+"t": "Three peseta devaluations",
+"f": "Spain devalued the peseta three times between September 1992 and May 1993."
+},
+{
+"c": "BE",
+"s": "1978-01",
+"t": "Belgium's debt mountain",
+"f": "Belgium's public debt passed 100% of GDP in the 1980s, one of the highest levels in Europe."
+}
+]

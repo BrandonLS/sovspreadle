@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data and credits | Spreadle</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.page{max-width:72ch;margin:0 auto;padding:28px 20px 60px;color:var(--ink)}
+.page h1{font:700 34px/1.15 Cinzel,serif;margin:18px 0 8px}
+.page h2{font:700 20px/1.3 Cinzel,serif;margin:30px 0 8px}
+.page p,.page li{line-height:1.6}
+.page table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0}
+.page th,.page td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:8px 10px 8px 0}
+.page a{color:inherit}
+.back{font-weight:600;text-decoration:none}
+</style>
+</head>
+<body>
+<main class="page">
+<a class="back" href="./">&larr; Back to Spreadle</a>
+<h1>Data and credits</h1>
+<p>Spreadle shows monthly averages of long-term government bond yields. Every source below is credited as its licence requires. Charts are drawn from these figures; nothing is endorsed by the organisations named.</p>
+<h2>Yield data</h2>
+<table>
+<tr><th>Source</th><th>What it supplies</th><th>Terms</th></tr>
+<tr><td><a href="https://www.oecd.org/">OECD</a> Main Economic Indicators, long-term interest rates, via <a href="https://fred.stlouisfed.org/">FRED, Federal Reserve Bank of St. Louis</a></td><td>The main monthly series for 34 countries, plus India, Colombia and Costa Rica, and Austria before 1990</td><td><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></td></tr>
+<tr><td><a href="https://data.ecb.europa.eu/">European Central Bank</a>, long-term interest rate statistics</td><td>Bulgaria, Croatia, Cyprus, Latvia, Malta, Romania</td><td>Free reuse with the source credited</td></tr>
+<tr><td><a href="https://data.imf.org/">International Monetary Fund</a>, International Financial Statistics, via <a href="https://db.nomics.world/">DBnomics</a></td><td>Malaysia, Thailand, Singapore; earlier years for Canada, the UK, India, Italy, South Korea, Norway; Spain 1978 to 1979 (via FRED)</td><td>IMF terms: free non-commercial reuse with credit</td></tr>
+<tr><td><a href="https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/">Japan Ministry of Finance</a>, JGB interest rates</td><td>Japan 1974 to 1988 (9-year yields before July 1986)</td><td>Reuse with credit</td></tr>
+<tr><td><a href="https://www.riksbank.se/">Sveriges Riksbank</a>, interest rate statistics</td><td>Denmark 1982 to 1986</td><td>Reuse with credit</td></tr>
+<tr><td><a href="https://www.macrohistory.net/database/">Jordà-Schularick-Taylor Macrohistory Database</a> (Jordà, Schularick and Taylor, "Macrofinancial History and the New Business Cycle Facts", NBER Macroeconomics Annual 2016, vol. 31)</td><td>Annual long-term rates, stretched to monthly to fill early years for 18 countries. Shown dotted and never the answer</td><td><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></td></tr>
+</table>
+<p>Some series are guess-only because they are not comparable 10-year benchmark yields: Iceland's OECD series is inflation-indexed, and the early years for South Korea (before October 2000), Israel (before 2001), Russia (before 2003) and India (before December 2011) come from different instruments or irregular sources.</p>
+<h2>Our data file</h2>
+<p>The combined monthly file Spreadle uses, <a href="data.json">data.json</a>, includes material from the Jordà-Schularick-Taylor database and is shared under the same licence, <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>, with the credits above. Spreadle is free and non-commercial.</p>
+<h2>Facts and ratings</h2>
+<p>Historical notes were checked against central-bank, IMF and EU publications. Rating landmarks on the ladder refer to public actions by S&amp;P and Moody's. If you spot an error, please report it.</p>
+<h2>Fonts and code</h2>
+<p>Cinzel and Public Sans, under the <a href="fonts/OFL-Cinzel.txt">SIL Open Font License</a>, served from this site. Sounds and music are synthesised in your browser. The game's code is released under the MIT licence.</p>
+<p>Spreadle is a game. Nothing here is investment advice.</p>
+</main>
+</body>
+</html>

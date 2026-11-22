@@ -1,0 +1,26 @@
+{
+ "name": "Spreadle",
+ "short_name": "Spreadle",
+ "description": "Guess the country from its 10-year bond yields. Five charts a day.",
+ "start_url": "./",
+ "display": "standalone",
+ "background_color": "#e9ebf3",
+ "theme_color": "#1b2a66",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml"
+  }
+ ]
+}

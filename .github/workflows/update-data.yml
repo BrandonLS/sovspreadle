@@ -1,0 +1,39 @@
+# Monthly: download the latest yields, rebuild data.json, extend the puzzle schedule, check, commit.
+# Published days in puzzles.json are never changed. Run it by hand from the Actions tab too.
+name: Monthly data update
+
+on:
+  schedule:
+    - cron: "17 5 4 * *" # 05:17 UTC on the 4th of each month, after most sources publish
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Download sources
+        run: python3 scripts/fetch_data.py
+      - name: Build data.json
+        run: python3 scripts/build_data.py
+      - name: Extend the puzzle schedule
+        run: node scripts/make_puzzles.mjs --ahead 400
+      - name: Check everything is playable
+        run: node scripts/check_site.mjs
+      - name: Commit changes
+        run: |
+          git config user.name "spreadle-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data public
+          if git diff --cached --quiet; then echo "No changes."; exit 0; fi
+          git commit -m "Monthly data update $(date -u +%Y-%m)"
+          git push

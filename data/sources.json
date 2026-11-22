@@ -1,0 +1,147 @@
+{
+ "_comment": "Sources in priority order. 'new' sources add countries; 'fill' sources only fill months that are still empty. Raw downloads live in data/raw/<name>.json.",
+ "sources": [
+  {
+   "name": "oecd_main",
+   "kind": "fred",
+   "role": "base",
+   "series": {
+    "US": "IRLTLT01USM156N",
+    "DE": "IRLTLT01DEM156N",
+    "GB": "IRLTLT01GBM156N",
+    "FR": "IRLTLT01FRM156N",
+    "IT": "IRLTLT01ITM156N",
+    "ES": "IRLTLT01ESM156N",
+    "PT": "IRLTLT01PTM156N",
+    "GR": "IRLTLT01GRM156N",
+    "IE": "IRLTLT01IEM156N",
+    "NL": "IRLTLT01NLM156N",
+    "BE": "IRLTLT01BEM156N",
+    "AT": "IRLTLT01ATM156N",
+    "FI": "IRLTLT01FIM156N",
+    "LU": "IRLTLT01LUM156N",
+    "CH": "IRLTLT01CHM156N",
+    "SE": "IRLTLT01SEM156N",
+    "NO": "IRLTLT01NOM156N",
+    "DK": "IRLTLT01DKM156N",
+    "IS": "IRLTLT01ISM156N",
+    "JP": "IRLTLT01JPM156N",
+    "AU": "IRLTLT01AUM156N",
+    "NZ": "IRLTLT01NZM156N",
+    "CA": "IRLTLT01CAM156N",
+    "KR": "IRLTLT01KRM156N",
+    "IL": "IRLTLT01ILM156N",
+    "PL": "IRLTLT01PLM156N",
+    "CZ": "IRLTLT01CZM156N",
+    "HU": "IRLTLT01HUM156N",
+    "SK": "IRLTLT01SKM156N",
+    "SI": "IRLTLT01SIM156N",
+    "MX": "IRLTLT01MXM156N",
+    "CL": "IRLTLT01CLM156N",
+    "ZA": "IRLTLT01ZAM156N",
+    "RU": "IRLTLT01RUM156N"
+   }
+  },
+  {
+   "name": "ecb",
+   "kind": "ecb",
+   "role": "new",
+   "countries": [
+    "BG",
+    "CY",
+    "HR",
+    "LV",
+    "MT",
+    "RO"
+   ]
+  },
+  {
+   "name": "imf_new",
+   "kind": "dbnomics_ifs",
+   "role": "new",
+   "countries": [
+    "MY",
+    "TH",
+    "SG"
+   ]
+  },
+  {
+   "name": "oecd_extra",
+   "kind": "fred",
+   "role": "new",
+   "series": {
+    "IN": "INDIRLTLT01STM",
+    "CO": "COLIRLTLT01STM",
+    "CR": "CRIIRLTLT01STM"
+   }
+  },
+  {
+   "name": "imf_old",
+   "kind": "dbnomics_ifs",
+   "role": "fill",
+   "countries": [
+    "CA",
+    "GB",
+    "IN",
+    "IT",
+    "KR",
+    "NO"
+   ],
+   "until": {
+    "CA": "1957-01",
+    "GB": "1962-01",
+    "IN": "2013-12",
+    "IT": "1993-03",
+    "KR": "2002-10",
+    "NO": "1987-01"
+   }
+  },
+  {
+   "name": "fred_old",
+   "kind": "fred",
+   "role": "fill",
+   "series": {
+    "AT": "IRLTCT01ATM156N",
+    "ES": "INTGSBESM193N"
+   },
+   "until": {
+    "AT": "1992-01",
+    "ES": "1982-01"
+   }
+  },
+  {
+   "name": "jp_mof",
+   "kind": "mof_jp",
+   "role": "fill",
+   "countries": [
+    "JP"
+   ],
+   "until": {
+    "JP": "1991-12"
+   }
+  },
+  {
+   "name": "riksbank",
+   "kind": "riksbank",
+   "role": "fill",
+   "series": {
+    "DK": "DKGVB10Y"
+   },
+   "until": {
+    "DK": "1988-12"
+   }
+  }
+ ],
+ "annual": {
+  "name": "jst",
+  "note": "Jorda-Schularick-Taylor Macrohistory Database R6, ltrate, 1949-2000, CC BY-NC-SA 4.0. Static: not refreshed."
+ },
+ "guess_only": {
+  "IN": "2011-12",
+  "KR": "2000-10",
+  "IL": "2001-01",
+  "RU": "2003-01",
+  "IS": "2100-01"
+ },
+ "start": "1950-01"
+}

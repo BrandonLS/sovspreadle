@@ -1,0 +1,7 @@
+/* Self-hosted fonts (SIL Open Font License, see fonts/OFL-*.txt): no requests to third-party servers. */
+@font-face{font-family:"Cinzel";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/cinzel-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Cinzel";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/cinzel-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/public-sans-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/public-sans-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/public-sans-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/public-sans-latin-700-normal.woff2) format("woff2")}
