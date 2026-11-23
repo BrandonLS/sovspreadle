@@ -1,0 +1,8 @@
+// Cloudflare deployment: serve the static site in public/ (no server code).
+{
+  "name": "sovspreadle",
+  "compatibility_date": "2026-11-23",
+  "assets": {
+    "directory": "./public"
+  }
+}
