@@ -5,7 +5,7 @@
 const $ = id => document.getElementById(id);
 
 /* ---------- sound (synthesized, no files) ---------- */
-const prefs = Object.assign({snd:true, mus:false}, store.get("spreadle-prefs") || {});
+const prefs = Object.assign({snd:true, mus:true}, store.get("spreadle-prefs") || {});
 let actx = null, master = null;
 function ac(){
   if(!actx){const A = window.AudioContext || window.webkitAudioContext; if(!A) return null;
@@ -520,7 +520,7 @@ $("hlq").addEventListener("click", e => { const b = e.target.closest("button"); 
 $("nextBtn").addEventListener("click", nextRound);
 $("histBtn").addEventListener("click", () => { const h = $("hist"), open = h.hidden; h.hidden = !open; $("histBtn").setAttribute("aria-expanded", open); $("histBtn").textContent = open ? "Hide full history" : "Show full history"; if(open) requestAnimationFrame(()=>{ drawHist(); h.scrollIntoView({behavior:"smooth", block:"nearest"}) }) });
 $("startBtn").addEventListener("click", () => { if(sess.done){ viewingDone = true; atHome = false; render(); openEnd(); return } start() });
-$("unlimBtn").addEventListener("click", () => { ac(); newUnlimited(); SFX.bell(); render() });
+$("unlimBtn").addEventListener("click", () => { ac(); newUnlimited(); SFX.bell(); if(prefs.mus && !musTimer) musicStart(); render() });
 $("endMWrap").addEventListener("click", playFinale);
 $("endUnlim").addEventListener("click", () => { closeDlg($("endDlg")); newUnlimited(); SFX.bell(); render() });
 $("homeBtn").addEventListener("click", () => { closeDlg($("endDlg")); loadDaily(); viewingDone = false; atHome = true; viewQ = 0; render() });
