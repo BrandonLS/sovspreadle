@@ -1,4 +1,4 @@
-/* Spreadle: the daily bond session, the interface. Needs core.js loaded first; loads data.json, episodes.json,
+/* SovSpreadle: the daily bond session, the interface. Needs core.js loaded first; loads data.json, episodes.json,
    notes.json and (when present) puzzles.json, the frozen daily schedule. */
 {
 'use strict';
@@ -90,6 +90,7 @@ function noteFor(c, s){ let best = -1, bl = 1e9; const seen = store.get("spreadl
 /* ---------- session state ---------- */
 let dayN, dayLabel, plan, sess, mode = "daily", viewQ = 0, revealAnim = false, viewingDone = false, atHome = true;
 function freshSession(rounds, n){ return {n, sig: hash(JSON.stringify(rounds)), cur:0, score:0, done:false, started:false, rs: rounds.map(()=>({g:[], h:[], seq:[], done:false, pts:0}))} }
+// storage keys keep their original "spreadle-" names so saved progress and streaks survive the rename
 function save(){ if(mode === "daily") store.set("spreadle-session4", sess) }
 function loadDaily(){
   mode = "daily"; plan = dailyPlan(dayN);
@@ -141,7 +142,7 @@ function autoFacts(k, s, max=2){
   const neg = a.slice(s, s+W).filter(v=>v!=null && v<0).length;
   if(neg) extra.push(`It was below zero for ${neg} of the 120 months.`);
   const peers = keys.filter(c=>D.series[c][pk]!=null);
-  if(peers.length >= 5 && peers.every(c=>D.series[c][pk] <= a[pk])) extra.push(`In ${mlong(pk)} that was the highest yield of the ${peers.length} countries in Spreadle with data that month.`);
+  if(peers.length >= 5 && peers.every(c=>D.series[c][pk] <= a[pk])) extra.push(`In ${mlong(pk)} that was the highest yield of the ${peers.length} countries in the game with data that month.`);
   let bi = -1, bd = 0; for(let i=s;i+12<s+W;i++) if(a[i]!=null && a[i+12]!=null && Math.abs(a[i+12]-a[i]) > Math.abs(bd)){bd = a[i+12]-a[i]; bi = i}
   if(bi >= 0) extra.push(`Its biggest 12-month move: ${bd>0?"+":"−"}${Math.abs(bd).toFixed(2)} points, from ${mlabel(bi)} to ${mlabel(bi+12)}.`);
   return out.concat(extra).slice(0, max);
@@ -476,11 +477,11 @@ function render(){
 function shareText(){
   const used = sess.rs.reduce((n,x)=>n+(x.h||[]).length, 0), st = mode === "daily" ? streakNow() : 0;
   const row = sess.rs.map(x=>x.pts>0 ? EMO[x.pts] : "🟥").join("");
-  return `Spreadle #${sess.n ?? "∞"}: ${gradeOf(sess.score)} (${sess.score}/${MAXPTS})${st > 1 ? ` 🔥${st}` : ""}\n${row}${used ? ` 💡${used}` : ""}${siteUrl() ? "\n" + siteUrl() : ""}`;
+  return `SovSpreadle #${sess.n ?? "∞"}: ${gradeOf(sess.score)} (${sess.score}/${MAXPTS})${st > 1 ? ` 🔥${st}` : ""}\n${row}${used ? ` 💡${used}` : ""}${siteUrl() ? "\n" + siteUrl() : ""}`;
 }
 // the public address for the share text: the canonical link once a real domain is set, else this page's address
 function siteUrl(){ const c = document.querySelector('link[rel="canonical"]')?.href;
-  if(c && !c.includes("spreadle.example")) return c;
+  if(c && !c.includes("sovspreadle.example")) return c;
   return /^https?:$/.test(location.protocol) && !/^(localhost|127\.)/.test(location.hostname) && !/claude/.test(location.hostname) ? location.origin + location.pathname.replace(/index\.html$/, "") : "" }
 function untilMidnight(){ const n = new Date(), m = new Date(n.getFullYear(), n.getMonth(), n.getDate()+1), ms = m-n; return `${Math.floor(ms/36e5)}h ${Math.floor(ms%36e5/6e4)}m` }
 function openEnd(fresh){

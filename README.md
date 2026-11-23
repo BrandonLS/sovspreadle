@@ -1,4 +1,4 @@
-# Spreadle
+# SovSpreadle
 
 A daily browser game: five 10-year government bond yield charts, five coupons each. Guess the country,
 the year, or who paid more to borrow, and earn a credit rating from D to AAA.
@@ -10,7 +10,7 @@ A monthly GitHub Action refreshes the data and extends the puzzle schedule.
 
 1. **Create a GitHub repository** and push this folder to it:
    ```sh
-   git remote add origin https://github.com/<you>/spreadle.git
+   git remote add origin https://github.com/<you>/sovspreadle.git
    git push -u origin main
    ```
 2. **Connect a free static host.** Cloudflare Pages is a good choice (fast, free, unlimited traffic):

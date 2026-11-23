@@ -12,7 +12,7 @@ from datetime import date
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW = os.path.join(ROOT, "data", "raw")
-UA = "spreadle-data-update/1.0 (monthly refresh of public bond-yield statistics)"
+UA = "sovspreadle-data-update/1.0 (monthly refresh of public bond-yield statistics)"
 
 
 def get(url, tries=3):

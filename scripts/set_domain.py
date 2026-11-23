@@ -1,5 +1,5 @@
 """Put your site's address into the page metadata (share previews need full addresses).
-Usage: python3 scripts/set_domain.py https://spreadle.example.com
+Usage: python3 scripts/set_domain.py https://sovspreadle.com
 """
 import os, re, sys
 

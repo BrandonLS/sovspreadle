@@ -1,4 +1,4 @@
-/* Spreadle core: reference data, data prep and the puzzle generator. No DOM here, so the same file runs in
+/* SovSpreadle core: reference data, data prep and the puzzle generator. No DOM here, so the same file runs in
    the browser (loaded before app.js) and in Node (scripts/make_puzzles.mjs builds the frozen schedule). */
 'use strict';
 /* ---------- reference data ---------- */

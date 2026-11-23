@@ -229,3 +229,4 @@ label{display:block;font-weight:600;margin-bottom:6px}
 .end-mwrap.rear .end-mascot{transform-origin:18% 90%}.end-mwrap.roar .end-mascot{transform-origin:82% 90%}
 .sugg button .part{margin-left:6px;font-size:12px;font-weight:400;color:var(--ink2)}
 .foot a{margin-left:12px;white-space:nowrap}
+.sov{color:var(--stamp);font-weight:500}

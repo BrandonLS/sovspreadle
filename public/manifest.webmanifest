@@ -1,6 +1,6 @@
 {
- "name": "Spreadle",
- "short_name": "Spreadle",
+ "name": "SovSpreadle",
+ "short_name": "SovSpreadle",
  "description": "Guess the country from its 10-year bond yields. Five charts a day.",
  "start_url": "./",
  "display": "standalone",
