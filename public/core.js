@@ -5,15 +5,15 @@
 const C = {
   US:["United States","Americas","US dollar"],CA:["Canada","Americas","Canadian dollar"],MX:["Mexico","Americas","Mexican peso"],CL:["Chile","Americas","Chilean peso"],
   DE:["Germany","Western Europe","Euro","Deutsche Mark before 1999"],FR:["France","Western Europe","Euro","franc before 1999"],IT:["Italy","Southern Europe","Euro","lira before 1999"],ES:["Spain","Southern Europe","Euro","peseta before 1999"],
-  PT:["Portugal","Southern Europe","Euro","escudo before 1999"],GR:["Greece","Southern Europe","Euro","drachma before 2001"],IE:["Ireland","Northern Europe","Euro","punt before 1999"],NL:["Netherlands","Western Europe","Euro","guilder before 1999"],
-  BE:["Belgium","Western Europe","Euro","franc before 1999"],AT:["Austria","Western Europe","Euro","schilling before 1999"],FI:["Finland","Northern Europe","Euro","markka before 1999"],LU:["Luxembourg","Western Europe","Euro","franc before 1999"],
-  SK:["Slovakia","Eastern Europe","Euro","koruna before 2009"],SI:["Slovenia","Southern Europe","Euro","tolar before 2007"],
-  GB:["United Kingdom","Northern Europe","Pound sterling"],CH:["Switzerland","Western Europe","Swiss franc"],SE:["Sweden","Northern Europe","Swedish krona"],NO:["Norway","Northern Europe","Norwegian krone"],
-  DK:["Denmark","Northern Europe","Danish krone"],IS:["Iceland","Northern Europe","Icelandic krona"],PL:["Poland","Eastern Europe","Polish zloty"],CZ:["Czechia","Eastern Europe","Czech koruna"],
-  HU:["Hungary","Eastern Europe","Hungarian forint"],JP:["Japan","Asia-Pacific","Japanese yen"],AU:["Australia","Asia-Pacific","Australian dollar"],NZ:["New Zealand","Asia-Pacific","New Zealand dollar"],
+  PT:["Portugal","Southern Europe","Euro","escudo before 1999"],GR:["Greece","Southern Europe","Euro","drachma before 2001"],IE:["Ireland","Western Europe","Euro","punt before 1999"],NL:["Netherlands","Western Europe","Euro","guilder before 1999"],
+  BE:["Belgium","Western Europe","Euro","franc before 1999"],AT:["Austria","Western Europe","Euro","schilling before 1999"],FI:["Finland","Nordic and Baltic","Euro","markka before 1999"],LU:["Luxembourg","Western Europe","Euro","franc before 1999"],
+  SK:["Slovakia","Central and Eastern Europe","Euro","koruna before 2009"],SI:["Slovenia","Central and Eastern Europe","Euro","tolar before 2007"],
+  GB:["United Kingdom","Western Europe","Pound sterling"],CH:["Switzerland","Western Europe","Swiss franc"],SE:["Sweden","Nordic and Baltic","Swedish krona"],NO:["Norway","Nordic and Baltic","Norwegian krone"],
+  DK:["Denmark","Nordic and Baltic","Danish krone"],IS:["Iceland","Nordic and Baltic","Icelandic krona"],PL:["Poland","Central and Eastern Europe","Polish zloty"],CZ:["Czechia","Central and Eastern Europe","Czech koruna"],
+  HU:["Hungary","Central and Eastern Europe","Hungarian forint"],JP:["Japan","Asia-Pacific","Japanese yen"],AU:["Australia","Asia-Pacific","Australian dollar"],NZ:["New Zealand","Asia-Pacific","New Zealand dollar"],
   KR:["South Korea","Asia-Pacific","Korean won"],IN:["India","Asia-Pacific","Indian rupee"],MY:["Malaysia","Asia-Pacific","Malaysian ringgit"],TH:["Thailand","Asia-Pacific","Thai baht"],SG:["Singapore","Asia-Pacific","Singapore dollar"],
-  BG:["Bulgaria","Eastern Europe","Bulgarian lev"],CY:["Cyprus","Southern Europe","Euro","Cypriot pound before 2008"],HR:["Croatia","Southern Europe","Euro","kuna before 2023"],LV:["Latvia","Northern Europe","Euro","lats before 2014"],MT:["Malta","Southern Europe","Euro","Maltese lira before 2008"],RO:["Romania","Eastern Europe","Romanian leu"],
-  CO:["Colombia","Americas","Colombian peso"],CR:["Costa Rica","Americas","Costa Rican colón"],IL:["Israel","Middle East and Africa","Israeli shekel"],ZA:["South Africa","Middle East and Africa","South African rand"],RU:["Russia","Eastern Europe","Russian ruble"]
+  BG:["Bulgaria","Central and Eastern Europe","Bulgarian lev"],CY:["Cyprus","Southern Europe","Euro","Cypriot pound before 2008"],HR:["Croatia","Southern Europe","Euro","kuna before 2023"],LV:["Latvia","Nordic and Baltic","Euro","lats before 2014"],MT:["Malta","Southern Europe","Euro","Maltese lira before 2008"],RO:["Romania","Central and Eastern Europe","Romanian leu"],
+  CO:["Colombia","Americas","Colombian peso"],CR:["Costa Rica","Americas","Costa Rican colón"],IL:["Israel","Middle East and Africa","Israeli shekel"],ZA:["South Africa","Middle East and Africa","South African rand"],RU:["Russia","Central and Eastern Europe","Russian ruble"]
 };
 const ALIAS = {"south korea":"KR",uk:"GB",britain:"GB","great britain":"GB",england:"GB",usa:"US",us:"US",america:"US","czech republic":"CZ",korea:"KR",holland:"NL",swiss:"CH"};
 const EASY = ["US","DE","GB","FR","IT","ES","JP","GR","CH"];

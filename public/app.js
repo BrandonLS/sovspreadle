@@ -323,7 +323,7 @@ function resolve(t){ t = t.trim().toLowerCase(); if(!t) return null; if(ALIAS[t]
   const up = t.toUpperCase(); if(C[up] && D.series[up]) return up; return guessable().find(k=>name(k).toLowerCase()===t) || null }
 // browsing: the full country list is open (only from the "All countries" button)
 let browsing = false;
-const REGION_ORDER = ["Northern Europe","Western Europe","Southern Europe","Eastern Europe","Americas","Asia-Pacific","Middle East and Africa"];
+const REGION_ORDER = ["Western Europe","Southern Europe","Nordic and Baltic","Central and Eastern Europe","Americas","Asia-Pacific","Middle East and Africa"];
 function matchAll(){ const t = $("q").value.trim().toLowerCase(), r = rd(), s = rs(); if((!t && !browsing) || r.t==="year" || r.t==="hl") return [];
   const hit = k => !t || name(k).toLowerCase().includes(t) || k.toLowerCase()===t || ALIAS[t]===k, pre = k => name(k).toLowerCase().startsWith(t) ? 0 : 1;
   const out = guessable().filter(k=>!s.g.includes(k) && hit(k)).map(k=>({k, ok: hasData(r,k)}));
