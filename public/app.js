@@ -316,7 +316,7 @@ function guil(svg){ const w = svg.clientWidth || 800, h = svg.clientHeight || 86
 const guessable = () => Object.keys(C).filter(k=>D.series[k]);
 function resolve(t){ t = t.trim().toLowerCase(); if(!t) return null; if(ALIAS[t] && D.series[ALIAS[t]]) return ALIAS[t];
   const up = t.toUpperCase(); if(C[up] && D.series[up]) return up; return guessable().find(k=>name(k).toLowerCase()===t) || null }
-// browsing: the full country list is open (from the "All countries" button or a click into the empty box)
+// browsing: the full country list is open (only from the "All countries" button)
 let browsing = false;
 const REGION_ORDER = ["Northern Europe","Western Europe","Southern Europe","Eastern Europe","Americas","Asia-Pacific","Middle East and Africa"];
 function matchAll(){ const t = $("q").value.trim().toLowerCase(), r = rd(), s = rs(); if((!t && !browsing) || r.t==="year" || r.t==="hl") return [];
@@ -524,7 +524,6 @@ function closeDlg(d){ if(d.open){ try{ d.close() }catch(e){ d.removeAttribute("o
 $("form").addEventListener("submit", e => { e.preventDefault(); const r = rd(); if(rs().done) return;
   if(r.t === "year") guessYear($("q").value); else guessCountry(resolve($("q").value)) });
 $("q").addEventListener("input", () => { $("msg").textContent = ""; pendingPartial = null; renderSugg() });
-$("q").addEventListener("click", () => { if(!$("q").value.trim() && !browsing){ browsing = true; renderSugg() } });
 $("q").addEventListener("keydown", e => { if(e.key === "Escape" && browsing){ browsing = false; renderSugg() } });
 $("allBtn").addEventListener("click", () => { browsing = !browsing; if(browsing) $("q").value = ""; renderSugg(); $("q").focus() });
 $("sugg").addEventListener("click", e => { const b = e.target.closest("button"); if(b) guessCountry(b.dataset.k) });
