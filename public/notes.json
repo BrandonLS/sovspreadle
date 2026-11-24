@@ -33,19 +33,22 @@
 "c": "US",
 "a": "1981-09",
 "b": "1981-09",
-"f": "Paul Volcker's Fed squeezed out inflation with record interest rates. The 10-year Treasury averaged 15.32% in September 1981, its all-time high."
+"f": "Paul Volcker's Fed squeezed out inflation with record interest rates. The 10-year Treasury averaged 15.32% in September 1981, its all-time high.",
+"h": "The Fed squeezed out inflation with record interest rates, and the 10-year Treasury hit its all-time high."
 },
 {
 "c": "GB",
 "a": "1992-09",
 "b": "1992-09",
-"f": "On 16 September 1992, \"Black Wednesday\", the pound crashed out of the European Exchange Rate Mechanism."
+"f": "On 16 September 1992, \"Black Wednesday\", the pound crashed out of the European Exchange Rate Mechanism.",
+"h": "The pound crashed out of the European Exchange Rate Mechanism, on a day traders still call Black Wednesday."
 },
 {
 "c": "SE",
 "a": "1992-09",
 "b": "1992-11",
-"f": "In September 1992 Sweden's central bank raised its overnight rate to 500% to defend the krona. It let the currency float two months later."
+"f": "In September 1992 Sweden's central bank raised its overnight rate to 500% to defend the krona. It let the currency float two months later.",
+"h": "The central bank raised its overnight rate to 500% to defend the krona. Two months later it gave up and let the currency float."
 },
 {
 "c": "IT",
@@ -57,7 +60,8 @@
 "c": "US",
 "a": "1994-01",
 "b": "1994-11",
-"f": "The Fed's surprise hikes in 1994 caused the \"great bond massacre\": the 10-year Treasury went from 5.75% in January to 7.96% in November."
+"f": "The Fed's surprise hikes in 1994 caused the \"great bond massacre\": the 10-year Treasury went from 5.75% in January to 7.96% in November.",
+"h": "Surprise Fed rate hikes set off what traders called the great bond massacre."
 },
 {
 "c": "JP",
@@ -69,13 +73,15 @@
 "c": "JP",
 "a": "1990-01",
 "b": "1990-09",
-"f": "Japan's asset bubble burst in 1990. Its 10-year yield peaked at 8.03% in September 1990, then began a decades-long slide."
+"f": "Japan's asset bubble burst in 1990. Its 10-year yield peaked at 8.03% in September 1990, then began a decades-long slide.",
+"h": "The asset bubble burst. The yield peaked, then began a slide that lasted decades."
 },
 {
 "c": "CH",
 "a": "2015-01",
 "b": "2020-12",
-"f": "In January 2015 the Swiss National Bank scrapped its cap on the franc. Swiss 10-year yields were negative in 59 of the 72 months from 2015 to 2020."
+"f": "In January 2015 the Swiss National Bank scrapped its cap on the franc. Swiss 10-year yields were negative in 59 of the 72 months from 2015 to 2020.",
+"h": "The central bank scrapped its cap on the franc without warning."
 },
 {
 "c": "DE",
@@ -105,13 +111,15 @@
 "c": "FR",
 "a": "1981-05",
 "b": "1981-12",
-"f": "After François Mitterrand won the presidency in May 1981, capital fled France and its 10-year yield passed 17%."
+"f": "After François Mitterrand won the presidency in May 1981, capital fled France and its 10-year yield passed 17%.",
+"h": "A new Socialist president took office, and capital fled the country."
 },
 {
 "c": "NZ",
 "a": "1984-07",
 "b": "1985-05",
-"f": "A currency crisis after New Zealand's 1984 snap election led to sweeping free-market reforms. Its yield peaked at 18.71% in May 1985."
+"f": "A currency crisis after New Zealand's 1984 snap election led to sweeping free-market reforms. Its yield peaked at 18.71% in May 1985.",
+"h": "A currency crisis after a snap election led to sweeping free-market reforms."
 },
 {
 "c": "ZA",
@@ -159,7 +167,8 @@
 "c": "GB",
 "a": "1976-09",
 "b": "1976-12",
-"f": "In 1976 Britain borrowed $3.9bn from the IMF, then the largest loan the fund had ever made."
+"f": "In 1976 Britain borrowed $3.9bn from the IMF, then the largest loan the fund had ever made.",
+"h": "Britain borrowed $3.9bn from the IMF, then the largest loan the fund had ever made."
 },
 {
 "c": "IE",
@@ -219,7 +228,8 @@
 "c": "US",
 "a": "1971-08",
 "b": "1971-08",
-"f": "Inflation rose with the Vietnam War. In August 1971 Richard Nixon ended the dollar's convertibility into gold."
+"f": "Inflation rose with the Vietnam War. In August 1971 Richard Nixon ended the dollar's convertibility into gold.",
+"h": "The president ended the dollar's convertibility into gold."
 },
 {
 "c": "DE",
@@ -253,21 +263,23 @@
 },
 {
 "c": "NO",
-"a": "1982-01",
-"b": "1982-12",
-"f": "Norway's government bond yield hit 13.7% in 1982, the highest level in a record going back to 1819."
+"a": "1986-06",
+"b": "1987-01",
+"f": "Norway's 10-year yield peaked at 13.63% in December 1986, months after the oil-price collapse forced a devaluation of the krone."
 },
 {
 "c": "DK",
 "a": "1982-09",
 "b": "1983-04",
-"f": "In autumn 1982 Denmark fixed its exchange rate, banned wage indexation and tightened its budget. Long-term yields fell from 22.93% in June 1982 to 14.19% by April 1983."
+"f": "In autumn 1982 Denmark fixed its exchange rate, banned wage indexation and tightened its budget. Long-term yields fell from 23.22% in September 1982 to 14.19% by April 1983.",
+"h": "The government fixed the exchange rate, banned wage indexation and slashed the deficit, and yields fell by 9 points in seven months."
 },
 {
 "c": "IT",
 "a": "1981-02",
 "b": "1981-07",
-"f": "In 1981 the Bank of Italy stopped having to buy the government bonds the Treasury could not sell, the so-called divorce. From then on the market set the price."
+"f": "In 1981 the Bank of Italy stopped having to buy the government bonds the Treasury could not sell, the so-called divorce. From then on the market set the price.",
+"h": "The central bank stopped having to buy the bonds the Treasury couldn't sell, the so-called \"divorce.\""
 },
 {
 "c": "AT",
@@ -291,7 +303,7 @@
 "c": "LV",
 "a": "2008-12",
 "b": "2009-12",
-"f": "In December 2008 Latvia agreed a €7.5 billion rescue from the EU, the IMF, its Nordic neighbours and others. Its economy shrank by about 14% in 2009."
+"f": "In December 2008 Latvia agreed a €7.5 billion rescue from the EU, the IMF, its Nordic neighbors and others. Its economy shrank by about 14% in 2009."
 },
 {
 "c": "RO",
@@ -339,6 +351,105 @@
 "c": "DK",
 "a": "2012-07",
 "b": "2012-07",
-"f": "In July 2012 Denmark's central bank became one of the first in the world to set a negative interest rate."
+"f": "In July 2012 Denmark's central bank became one of the first in the world to set a negative interest rate.",
+"h": "The central bank became one of the first in the world to set a negative interest rate."
+},
+{
+"c": "US",
+"a": "2016-11",
+"b": "2016-12",
+"f": "In November 2016 Donald Trump's election win set off a bond sell-off. The 10-year Treasury rose from 1.76% in October to 2.49% in December.",
+"h": "A surprise presidential election result set off a bond sell-off."
+},
+{
+"c": "US",
+"a": "1979-10",
+"b": "1979-10",
+"f": "In October 1979 Fed chair Paul Volcker announced, at a rare Saturday press conference, that the Fed would target the money supply. The 10-year yield jumped from 9.33% to 10.30% in a month.",
+"h": "A new Fed chair announced a radical policy shift at a rare Saturday press conference."
+},
+{
+"c": "GR",
+"a": "2012-05",
+"b": "2012-06",
+"f": "Greece held two elections in six weeks, in May and June 2012, with leaving the euro openly debated. Its 10-year yield climbed back to 27.82% in June 2012.",
+"h": "Two elections in six weeks, with leaving the euro openly debated."
+},
+{
+"c": "GR",
+"a": "2015-01",
+"b": "2015-07",
+"f": "In January 2015 the anti-austerity party Syriza won a snap election. In July 2015 voters rejected the bailout terms in a referendum. Greece's 10-year yield rose from 8.42% in December 2014 to 12.00% in April 2015.",
+"h": "An anti-austerity party won a snap election. Months later, voters rejected the bailout terms in a referendum."
+},
+{
+"c": "IT",
+"a": "2018-05",
+"b": "2018-10",
+"f": "Italy's new populist coalition took office in June 2018. That October the European Commission rejected its draft budget, a first for any member state, and Italy's spread over Germany reached 3.07 points.",
+"h": "A new populist coalition clashed with Brussels, and the European Commission rejected Italy's draft budget, a first for any member state."
+},
+{
+"c": "GB",
+"a": "2016-06",
+"b": "2016-08",
+"f": "On June 23, 2016, British voters chose to leave the EU. In August the Bank of England cut rates and restarted bond buying, and the 10-year gilt yield fell to 0.74%.",
+"h": "Voters chose to leave the EU. The Bank of England cut rates and restarted bond buying."
+},
+{
+"c": "GB",
+"a": "1997-05",
+"b": "1997-05",
+"f": "In May 1997, in its first week in office, the new Labour government handed control of interest rates to the Bank of England. The 10-year gilt yield fell from 7.64% in April to 7.17% in May.",
+"h": "In its first week, a new government handed control of interest rates to the Bank of England."
+},
+{
+"c": "GB",
+"a": "1979-10",
+"b": "1979-11",
+"f": "In October 1979 the new Conservative government abolished exchange controls that had been in place since 1939. The 10-year gilt yield rose from 13.09% that month to 14.76% in November.",
+"h": "The new government abolished exchange controls that had been in place for 40 years."
+},
+{
+"c": "ZA",
+"a": "2015-12",
+"b": "2016-01",
+"f": "In December 2015 President Jacob Zuma fired his finance minister. Within a week South Africa had had three, and its 10-year yield rose from 8.49% in November to 9.63% in January.",
+"h": "The president fired the finance minister, and within a week the country had had three."
+},
+{
+"c": "DE",
+"a": "1990-02",
+"b": "1990-07",
+"f": "In February 1990 Chancellor Helmut Kohl offered East Germany a monetary union, months before reunification. Germany's 10-year yield jumped from 7.70% in January to 8.57% in February.",
+"h": "The chancellor offered East Germany a monetary union, ahead of reunification."
+},
+{
+"c": "CA",
+"a": "1995-01",
+"b": "1995-02",
+"f": "In January 1995, with Canada's 10-year yield above 9%, a Wall Street Journal editorial called the country an honorary member of the Third World. The next month's federal budget began deep spending cuts.",
+"h": "With yields above 9%, a Wall Street Journal editorial called the country an honorary member of the Third World. A deficit-cutting budget followed."
+},
+{
+"c": "FR",
+"a": "2024-06",
+"b": "2024-12",
+"f": "In June 2024 President Emmanuel Macron called a snap election. In December 2024 the government fell in the first successful no-confidence vote since 1962. France's spread over Germany widened from 0.51 points in May to 0.83 in December.",
+"h": "The president called a snap election. Six months later, the government fell in the first successful no-confidence vote since 1962."
+},
+{
+"c": "JP",
+"a": "2013-04",
+"b": "2013-05",
+"f": "In April 2013 the Bank of Japan promised to double the money base in two years. Japan's 10-year yield dipped to 0.49% that month, then jumped to 0.88% in May.",
+"h": "The central bank promised to double the money supply in two years."
+},
+{
+"c": "SE",
+"a": "1994-01",
+"b": "1994-09",
+"f": "In 1994 a global bond rout met a Swedish budget deficit of over 10% of GDP. Sweden's 10-year yield rose from 6.84% in January to 11.24% in September.",
+"h": "A global bond rout and a budget deficit of over 10% of GDP."
 }
 ]

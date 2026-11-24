@@ -81,6 +81,9 @@ function playFinale(){ const m = $("endMascot"), bull = rungOf(sess.score) >= 5,
   w.classList.remove("rear","roar"); void w.getBoundingClientRect(); w.classList.add(bull ? "rear" : "roar"); finaleSound(bull) }
 
 // notes cover a country and a period; one shows when the window covers enough of that period
+// a short note with a date-free hint (h) can tell the story of a peak or low in a guess-the-year round
+function storyNote(r){ if(r.t !== "year" || r.ep != null) return -1;
+  return NOTES.findIndex(n=>n.c === r.c && n.h && ix(n.a) <= r.pk && r.pk <= ix(n.b) && ix(n.b) - ix(n.a) <= 12) }
 function noteFor(c, s){ let best = -1, bl = 1e9; const seen = store.get("spreadle-notes") || {}, now = Date.now();
   NOTES.forEach((n, i)=>{ if(n.c !== c) return; const a = ix(n.a), b = ix(n.b), len = b-a+1, ov = Math.min(b, s+W-1) - Math.max(a, s) + 1;
     if(a < s || a > s+W-1 || ov < Math.min(24, len) || (seen[i] && now-seen[i] < 30*864e5)) return;
@@ -154,7 +157,7 @@ function finishRound(pts){
   const s = rs(); if(s.done) return;
   const before = sess.rs.slice(0, sess.cur).some(x=>x.done) ? rungOf(sess.score) : null;
   s.done = true; s.pts = pts; s.before = before;
-  const r0 = rd(); s.nt = r0.t !== "hl" && r0.ep == null ? noteFor(r0.c, r0.s) : -1;
+  const r0 = rd(); s.nt = r0.t !== "hl" && r0.ep == null ? (storyNote(r0) >= 0 ? storyNote(r0) : noteFor(r0.c, r0.s)) : -1;
   sess.score = Math.max(0, sess.score + pts);
   if(sess.cur === ROUNDS-1){ sess.done = true; viewingDone = true; if(mode === "daily") recordStats() }
   save(); revealAnim = true;
@@ -390,7 +393,8 @@ function renderRound(){
     const ep = r.ep != null ? epOf(r) : null;
     q = ep ? `${name(r.c)}: in what year was the marked moment?` : `${name(r.c)}: in what year did the marked ${r.ym === "low" ? "low" : "peak"} happen?`;
     facts = [["Instrument", `${name(r.c)}'s 10-year yield`], ["Window", done ? winTxt : "10 years, dates hidden"], ["Marked point", done ? `${fmt(D.series[r.c][r.pk])}, ${mlong(r.pk)}` : fmt(D.series[r.c][r.pk])], ["Decade", s.h.includes("decade")||done ? `${Math.floor(yearOf(r.pk)/10)*10}s` : null]];
-    if(ep) facts.push(["The story", s.h.includes("story")||done ? ep.q.replace(/^The marked point is /, "").replace(/^./, c=>c.toUpperCase()) : null]);
+    const sn = ep ? -1 : storyNote(r), story = ep ? ep.q.replace(/^The marked point is /, "").replace(/^./, c=>c.toUpperCase()) : sn >= 0 ? NOTES[sn].h : null;
+    if(story) facts.push(["The story", s.h.includes("story")||done ? story : null]);
   } else {
     const qi = Math.min(viewQ, r.qs.length-1), qq = r.qs[qi];
     q = `Who paid more to borrow for 10 years in ${mlong(qq.m)}?`;
@@ -421,7 +425,7 @@ function renderRound(){
     renderSugg();
   }
   // hints
-  const hs = r.t === "year" ? [["decade","Decade"], ...(r.ep != null ? [["story","The story"]] : [])] : isHL ? [] : [["region","Region"],["twin","Closest twin"],["zoom","Zoom out 5 years"]];
+  const hs = r.t === "year" ? [["decade","Decade"], ...(r.ep != null || storyNote(r) >= 0 ? [["story","The story"]] : [])] : isHL ? [] : [["region","Region"],["twin","Closest twin"],["zoom","Zoom out 5 years"]];
   $("hints").hidden = done || !hs.length;
   const canHint = s.seq.length < COUPONS-1;
   $("hints").innerHTML = hs.length ? `<span>${canHint ? "A hint costs one coupon:" : "Keep your last coupon for a guess."}</span>` + hs.map(([k,l])=>`<button type="button" data-h="${k}" ${s.h.includes(k)||!canHint||(k==="twin"&&!tw)?"disabled":""} ${k==="twin"&&!tw?'title="No other country moved closely enough with this one"':""}><svg aria-hidden="true"><use href="#coin"/></svg>${l}</button>`).join("") : "";

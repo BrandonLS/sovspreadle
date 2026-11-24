@@ -165,9 +165,11 @@ function genTwist(r, used, type, ctx){
 }
 function buildPlan(seed, n, ctx){
   const r = rngOf(hash(seed)), used = new Set(), rounds = [];
-  let eps = EPS.filter(e=>epOk(ctx, e, true));
-  if(!eps.length) eps = EPS.filter(e=>epOk(ctx, e, false));
-  if(!eps.length) eps = EPS;
+  // year-only episodes (yo) are dated events for guess-the-year rounds, not headline charts
+  const heads = EPS.filter(e=>!e.yo);
+  let eps = heads.filter(e=>epOk(ctx, e, true));
+  if(!eps.length) eps = heads.filter(e=>epOk(ctx, e, false));
+  if(!eps.length) eps = heads;
   const ep = pick(r, eps);
   // the order: a headline, an easy or medium country, two guess-the-year rounds, then higher or lower.
   // Unlimited sessions (n null) swap the second year round for the spread round half the time.
