@@ -190,8 +190,10 @@ function guessYear(raw){
   if(!(y >= 1950 && y <= 2026)){msg.textContent = "Type a year between 1950 and 2026."; return}
   if(s.g.includes(y)){msg.textContent = `You already tried ${y}.`; return}
   s.g.push(y); s.seq.push({k:"g", v:y}); $("q").value = "";
-  if(y === ans) finishRound(ptsFor(s.seq.length));
-  else if(Math.abs(y-ans) === 1) finishRound(Math.max(1, ptsFor(s.seq.length)-2));
+  // within one year counts in full; two or three years off ends the bond with half points, rounded up
+  const off = Math.abs(y-ans);
+  if(off <= 1) finishRound(ptsFor(s.seq.length));
+  else if(off <= 3) finishRound(Math.ceil(ptsFor(s.seq.length)/2));
   else if(s.seq.length >= COUPONS) finishRound(0);
   else {SFX.bonk(); save(); render(); $("q").focus()}
 }
@@ -351,7 +353,7 @@ function renderHeader(){
 function roundTier(i){ const s = sess.rs[i]; if(!s.done) return null; return s.pts >= 4 ? 0 : s.pts === 3 ? 1 : s.pts >= 1 ? 2 : 3 }
 // each finished bond is a market candle: solved on coupon 1, 2, 3 = big, medium, small green; coupon 4 = flat;
 // coupon 5 = small red; missed = big red. Higher or lower: 3, 2, 1, 0 right = big green, small green, small red, big red.
-// Guess the year one year off counts one size smaller than the exact year.
+// Guess the year two or three years off (half points) counts one size smaller.
 const CANDLES = [["up","big"],["up","mid"],["up","small"],["flat","flat"],["down","small"],["down","big"]];
 const CANDLE_TXT = {"up big":"big green candle","up mid":"medium green candle","up small":"small green candle","flat flat":"flat candle","down small":"small red candle","down big":"big red candle"};
 function candleOf(i){ const s = sess.rs[i], r = plan[i]; if(!s.done) return null;
@@ -421,7 +423,7 @@ function renderRound(){
   $("hlq").hidden = !isHL;
   if(isHL) renderHL();
   if(!done && !isHL){
-    $("qLabel").textContent = r.t === "year" ? "Your guess: a year (exact scores most; one year off still counts)" : "Your guess: a country";
+    $("qLabel").textContent = r.t === "year" ? "Your guess: a year (within one year counts in full; within three earns half)" : "Your guess: a country";
     const inp = $("q"); inp.placeholder = r.t === "year" ? "e.g. 1981" : "Type a country"; inp.inputMode = r.t === "year" ? "numeric" : "text";
     $("pool").textContent = r.t === "year" ? "Each wrong guess tells you earlier or later." : `${guessable().filter(k=>hasData(r,k)).length} of ${guessable().length} countries have data in this window.`;
     renderSugg();
@@ -441,9 +443,9 @@ function renderRound(){
     if(g == null){ h += `<li class="coupon empty"><div class="no">${isHL ? `Question ${i+1}` : `Coupon ${i+1}`}</div><div>${isHL ? "Not answered" : "Unclipped"}</div></li>`; continue }
     if(isHL){ const qq = r.qs[i], o = g===qq.a ? qq.b : qq.a, ok = D.series[g][qq.m] >= D.series[o][qq.m];
       h += `<li class="coupon used"><div class="no">Question ${i+1}, ${mlabel(qq.m)}</div><div class="who"><span class="seal" style="--c:${ok?TIERC[0]:TIERC[3]}"></span>${ok?"Right":"Wrong"}</div><div class="nums"><span class="nd">${esc(name(qq.a))} ${fmt(D.series[qq.a][qq.m])}, ${esc(name(qq.b))} ${fmt(D.series[qq.b][qq.m])}</span></div></li>`; continue }
-    if(r.t === "year"){ const ans = yearOf(r.pk), d = ans-g, ok = Math.abs(d) <= 1, ad = Math.abs(d);
-      const band = ad >= 10 ? "10 or more years" : ad >= 5 ? "5 to 9 years" : "2 to 4 years";
-      h += `<li class="coupon used"><div class="no">Coupon ${i+1}</div><div class="who"><span class="seal" style="--c:${ok?TIERC[0]:ad<5?TIERC[2]:TIERC[3]}"></span>${g}</div><div class="nums"><span class="nd">${d === 0 ? "Exact" : ok ? "One year off, counts" : `${d>0?"Later":"Earlier"}, by ${band}`}</span></div></li>`; continue }
+    if(r.t === "year"){ const ans = yearOf(r.pk), d = ans-g, ad = Math.abs(d), ok = ad <= 1, near = ad <= 3;
+      const band = ad >= 10 ? "10 or more years" : ad >= 5 ? "5 to 9 years" : "4 years";
+      h += `<li class="coupon used"><div class="no">Coupon ${i+1}</div><div class="who"><span class="seal" style="--c:${ok?TIERC[0]:near?TIERC[1]:ad<5?TIERC[2]:TIERC[3]}"></span>${g}</div><div class="nums"><span class="nd">${d === 0 ? "Exact" : ok ? "One year off, counts in full" : near ? `${ad} years off, half points` : `${d>0?"Later":"Earlier"}, by ${band}`}</span></div></li>`; continue }
     const c = compare(r, g); let nums;
     if(c.tier === 0) nums = "<span>Correct</span>";
     else if(c.tier === 4) nums = "<span class='nd'>No data in this window</span>";

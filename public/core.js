@@ -33,9 +33,9 @@ const RATINGS = [
 const KIND = {headline:"Headline",easy:"Easy",medium:"Medium",hard:"Hard",spread:"Spread vs Germany",hl:"Higher or lower",year:"Guess the year"};
 const W = 120, ROUNDS = 5, COUPONS = 5, QS = 3, EPOCH = Date.UTC(2026, 10, 22);
 const ptsFor = used => used === 1 ? 4 : used === 2 ? 3 : used === 3 ? 2 : 1;
-const MAXPTS = 20, IG = 11;
+const MAXPTS = 20, IG = 10;
 // one grade per point, like the agencies' notches; families (AA+, AA, AA- = AA) drive the ladder
-const GRADES = ["D","C","C","CCC","CCC","B-","B","B+","BB-","BB","BB+","BBB-","BBB","BBB+","A-","A","A+","AA-","AA","AA+","AAA"];
+const GRADES = ["D","C","CCC","CCC","B-","B","B+","BB-","BB","BB+","BBB-","BBB","BBB+","A-","A","A+","AA-","AA","AA","AA+","AAA"];
 const gradeOf = sc => GRADES[Math.max(0, Math.min(MAXPTS, sc))];
 const MON = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ");
 const MONTH = "January February March April May June July August September October November December".split(" ");

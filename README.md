@@ -20,8 +20,9 @@ Play it at **https://sovspreadle.app**.
   4. **Guess the year** again, with another country.
   5. **Higher or lower:** three times, pick which of two countries paid more to borrow in a given month.
 - **Scoring:** 4 points for the first coupon, 3 for the second, 2 for the third, 1 after that, 0 for a miss.
-  Your total out of 20 sets your rating, one notch per point. Only a perfect 20 is AAA, and BBB- (11 points)
-  is investment grade.
+  In guess the year, within one year counts in full and two or three years off earns half, rounded up.
+  Your total out of 20 sets your rating, roughly one notch per point. Only a perfect 20 is AAA, and BBB-
+  (10 points) is investment grade.
 - **After each bond** you see the full history of that country's yield and, often, a short story about what
   happened in those years.
 - **Play unlimited** for extra rounds that don't count toward your streak. Unlimited sometimes swaps in a
