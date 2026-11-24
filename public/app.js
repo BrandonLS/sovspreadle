@@ -161,7 +161,7 @@ function finishRound(pts){
   render();
   setTimeout(()=>{ const r = $("reveal"); if(r && !r.hidden) r.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"nearest"}) }, 120);
   // after the last bond, the rating opens by itself once the answer has landed (the button still reopens it)
-  if(sess.done){ const at = sess; setTimeout(()=>{ if(sess === at && !atHome && !$("endDlg").open) openEnd(true) }, 1500) }
+  if(sess.done){ const at = sess; setTimeout(()=>{ if(sess === at && (mode !== "daily" || !atHome) && !$("endDlg").open) openEnd(true) }, 1500) }
 }
 // pass: give up the bond, every coupon left counts as a miss. Two taps, so a stray click doesn't cost the bond.
 let passArm = null;
