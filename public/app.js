@@ -57,18 +57,21 @@ function musicStart(){const c=ac(); if(!c) return; if(!musBus){musBus=c.createGa
     SONG.mel[bar].forEach(([p,n])=>{if(p===s) pianoNote(n,musNext,.11,.4)});
     musNext+=st; musStep++}},90)}
 function musicStop(){clearInterval(musTimer); musTimer=null}
-/* end-of-session finale: a cash register for the bull, a growl for the bear */
+/* end-of-session finale: a bellow for the bull, a growl for the bear */
 function finaleSound(bull){const c=ac(); if(!c||!prefs.snd) return;
   if(!musBus){musBus=c.createGain(); musBus.gain.value=.5; musBus.connect(master)}
   const t=c.currentTime+.05;
-  if(musTimer){musBus.gain.setTargetAtTime(.12,c.currentTime,.05); musBus.gain.setTargetAtTime(.5,t+(bull?1.6:1),.3)}
-  if(bull){ // a cash register: two key presses, the drawer bell, the drawer sliding out, coins settling
-    [0,.09].forEach(d=>noise(t+d,.025,.22,"bandpass",1700));
-    [[1,1],[2.4,.4],[3.9,.22],[5.3,.12]].forEach(([m,a])=>tone(2350*m,t+.22,.2*a,1.1-m*.1));
-    noise(t+.24,.03,.15,"highpass",4000);
-    noise(t+.3,.22,.3,"lowpass",450); const th=tone(95,t+.3,.35,.18,"sine"); th.frequency.exponentialRampToValueAtTime(55,t+.46);
-    for(let k=0;k<9;k++){const tt=t+.5+k*.045+Math.random()*.03, f=3800+Math.random()*2600;
-      tone(f,tt,.05,.09); noise(tt,.012,.07,"highpass",5000)}
+  if(musTimer){musBus.gain.setTargetAtTime(.12,c.currentTime,.05); musBus.gain.setTargetAtTime(.5,t+(bull?1.5:1),.3)}
+  if(bull){ // a deep bull bellow: a low "mmm" opening into "OOO", with a sub-octave underneath
+    const d=1.4, lp=c.createBiquadFilter(); lp.type="lowpass"; lp.Q.value=4;
+    lp.frequency.setValueAtTime(200,t); lp.frequency.linearRampToValueAtTime(720,t+d*.35); lp.frequency.linearRampToValueAtTime(460,t+d);
+    const g=c.createGain(); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.36,t+.14); g.gain.setValueAtTime(.36,t+d-.28); g.gain.exponentialRampToValueAtTime(.0001,t+d);
+    lp.connect(g); g.connect(master);
+    const lfo=c.createOscillator(), lg=c.createGain(); lfo.frequency.value=5.5; lg.gain.value=2; lfo.connect(lg); lfo.start(t); lfo.stop(t+d+.05);
+    [[1,"sawtooth"],[1.006,"sawtooth"],[.5,"sine"]].forEach(([k,type])=>{const o=c.createOscillator(); o.type=type;
+      o.frequency.setValueAtTime(58*k,t); o.frequency.exponentialRampToValueAtTime(92*k,t+d*.3); o.frequency.setValueAtTime(92*k,t+d*.6); o.frequency.exponentialRampToValueAtTime(52*k,t+d);
+      lg.connect(o.frequency); o.connect(type==="sine" ? g : lp); o.start(t); o.stop(t+d+.05)});
+    noise(t,d*.9,.03,"lowpass",900);
   } else SFX.growl();
 }
 function playFinale(){ const m = $("endMascot"), bull = rungOf(sess.score) >= 5, w = m.parentNode;
