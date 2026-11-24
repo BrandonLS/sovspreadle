@@ -57,26 +57,20 @@ function musicStart(){const c=ac(); if(!c) return; if(!musBus){musBus=c.createGa
     SONG.mel[bar].forEach(([p,n])=>{if(p===s) pianoNote(n,musNext,.11,.4)});
     musNext+=st; musStep++}},90)}
 function musicStop(){clearInterval(musTimer); musTimer=null}
-/* end-of-session finale: a ragtime fanfare for the bull, a roar and a sad trombone for the bear */
+/* end-of-session finale: a cash register for the bull, a growl for the bear */
 function finaleSound(bull){const c=ac(); if(!c||!prefs.snd) return;
   if(!musBus){musBus=c.createGain(); musBus.gain.value=.5; musBus.connect(master)}
   const t=c.currentTime+.05;
-  if(musTimer){musBus.gain.setTargetAtTime(.12,c.currentTime,.05); musBus.gain.setTargetAtTime(.5,t+3.2,.3)}
-  if(bull){ // pickup run, then a held C major chord over an oom-pah bass
-    [[0,67],[.11,72],[.22,76],[.33,79]].forEach(([d,n])=>pianoNote(n,t+d,.2,.22));
-    [[.48,77],[.6,76],[.72,74]].forEach(([d,n])=>pianoNote(n,t+d,.16,.16));
-    [84,88,91].forEach(n=>pianoNote(n,t+.9,.14,1.6)); [48,60].forEach(n=>pianoNote(n,t+.9,.2,1.4));
-    pianoNote(43,t+.6,.16,.3); setTimeout(SFX.kaching, 1000);
-  } else { // the roar first, then four drooping trombone notes
-    SFX.growl();
-    const f=c.createBiquadFilter(); f.type="lowpass"; f.frequency.value=900; f.connect(master);
-    [[.9,58],[1.35,57],[1.8,56],[2.25,55]].forEach(([d,n],i)=>{const tt=t+d, last=i===3, dur=last?1.1:.38;
-      const o=c.createOscillator(), g=c.createGain(); o.type="sawtooth"; o.frequency.setValueAtTime(mtof(n),tt);
-      if(last){ const lfo=c.createOscillator(), lg=c.createGain(); lfo.frequency.value=5.5; lg.gain.value=4; lfo.connect(lg); lg.connect(o.frequency); lfo.start(tt+.15); lfo.stop(tt+dur);
-        o.frequency.linearRampToValueAtTime(mtof(n)*.9,tt+dur) }
-      g.gain.setValueAtTime(.0001,tt); g.gain.exponentialRampToValueAtTime(.16,tt+.05); g.gain.setValueAtTime(.16,tt+dur-.12); g.gain.exponentialRampToValueAtTime(.0001,tt+dur);
-      o.connect(g); g.connect(f); o.start(tt); o.stop(tt+dur+.05)});
-  }}
+  if(musTimer){musBus.gain.setTargetAtTime(.12,c.currentTime,.05); musBus.gain.setTargetAtTime(.5,t+(bull?1.6:1),.3)}
+  if(bull){ // a cash register: two key presses, the drawer bell, the drawer sliding out, coins settling
+    [0,.09].forEach(d=>noise(t+d,.025,.22,"bandpass",1700));
+    [[1,1],[2.4,.4],[3.9,.22],[5.3,.12]].forEach(([m,a])=>tone(2350*m,t+.22,.2*a,1.1-m*.1));
+    noise(t+.24,.03,.15,"highpass",4000);
+    noise(t+.3,.22,.3,"lowpass",450); const th=tone(95,t+.3,.35,.18,"sine"); th.frequency.exponentialRampToValueAtTime(55,t+.46);
+    for(let k=0;k<9;k++){const tt=t+.5+k*.045+Math.random()*.03, f=3800+Math.random()*2600;
+      tone(f,tt,.05,.09); noise(tt,.012,.07,"highpass",5000)}
+  } else SFX.growl();
+}
 function playFinale(){ const m = $("endMascot"), bull = rungOf(sess.score) >= 5, w = m.parentNode;
   w.classList.remove("rear","roar"); void w.getBoundingClientRect(); w.classList.add(bull ? "rear" : "roar"); finaleSound(bull) }
 
