@@ -166,6 +166,12 @@ function finishRound(pts){
   // after the last bond, the rating opens by itself once the answer has landed (the button still reopens it)
   if(sess.done){ const at = sess; setTimeout(()=>{ if(sess === at && !atHome && !$("endDlg").open) openEnd(true) }, 1500) }
 }
+// pass: give up the bond, every coupon left counts as a miss. Two taps, so a stray click doesn't cost the bond.
+let passArm = null;
+function resetPass(){ const b = $("passBtn"); if(!b) return; clearTimeout(passArm); passArm = null; b.classList.remove("arm"); b.textContent = "Pass" }
+function passRound(){ const s = rs(), b = $("passBtn"); if(!s || s.done) return;
+  if(!passArm){ b.classList.add("arm"); b.textContent = "Sure? 0 points"; passArm = setTimeout(resetPass, 3000); return }
+  resetPass(); while(s.seq.length < COUPONS) s.seq.push({k:"p"}); browsing = false; $("q").value = ""; finishRound(0) }
 function guessCountry(code){
   const r = rd(), s = rs(), msg = $("msg"); msg.textContent = "";
   if(!code){const m = matches(); if(m.length === 1) code = m[0];
@@ -209,7 +215,7 @@ function useHint(type){
   const s = rs(); if(s.done || s.h.includes(type) || s.seq.length >= COUPONS-1) return;
   s.h.push(type); s.seq.push({k:"h", v:type}); SFX.click(); save(); render();
 }
-function nextRound(){
+function nextRound(){ resetPass();
   if(sess.cur >= ROUNDS-1){ openEnd(true); return }
   sess.cur++; viewQ = 0; save(); render(); window.scrollTo({top:0, behavior:"auto"}); SFX.click();
   const inp = $("q"); if(inp && !$("form").hidden) inp.focus({preventScroll:true});
@@ -438,6 +444,7 @@ function renderRound(){
   const HN = {region:"Region", twin:"Closest twin", zoom:"Zoom out 5 years", decade:"Decade", story:"The story"};
   for(let i=0;i<(isHL ? QS : COUPONS);i++){
     const e = isHL ? (s.g[i] != null ? {k:"g", v:s.g[i]} : null) : s.seq[i], g = e && e.k === "g" ? e.v : null;
+    if(e && e.k === "p"){ h += `<li class="coupon used"><div class="no">Coupon ${i+1}</div><div class="who"><span class="seal" style="--c:${TIERC[3]}"></span>Passed</div><div class="nums"><span class="nd">Counted as a miss</span></div></li>`; continue }
     if(e && e.k === "h"){ h += `<li class="coupon used hintc"><div class="no">Coupon ${i+1}</div><div class="who"><span class="seal"></span>Hint</div><div class="nums"><span class="nd">${HN[e.v]||e.v}</span></div></li>`; continue }
     if(g == null){ h += `<li class="coupon empty"><div class="no">${isHL ? `Question ${i+1}` : `Coupon ${i+1}`}</div><div>${isHL ? "Not answered" : "Unclipped"}</div></li>`; continue }
     if(isHL){ const qq = r.qs[i], o = g===qq.a ? qq.b : qq.a, ok = D.series[g][qq.m] >= D.series[o][qq.m];
@@ -543,6 +550,7 @@ $("form").addEventListener("submit", e => { e.preventDefault(); const r = rd(); 
   if(r.t === "year") guessYear($("q").value); else guessCountry(resolve($("q").value)) });
 $("q").addEventListener("input", () => { $("msg").textContent = ""; pendingPartial = null; renderSugg() });
 $("q").addEventListener("keydown", e => { if(e.key === "Escape" && browsing){ browsing = false; renderSugg() } });
+$("passBtn").addEventListener("click", passRound);
 $("allBtn").addEventListener("click", () => { browsing = !browsing; if(browsing) $("q").value = ""; renderSugg(); $("q").focus() });
 $("sugg").addEventListener("click", e => { const b = e.target.closest("button"); if(b) guessCountry(b.dataset.k) });
 $("hints").addEventListener("click", e => { const b = e.target.closest("button[data-h]"); if(b) useHint(b.dataset.h) });
@@ -553,6 +561,9 @@ $("histBtn").addEventListener("click", () => { const h = $("hist"), open = h.hid
 $("startBtn").addEventListener("click", () => { if(sess.done){ viewingDone = true; atHome = false; render(); openEnd(); return } start() });
 $("unlimBtn").addEventListener("click", () => { ac(); newUnlimited(); SFX.bell(); if(prefs.mus && !musTimer) musicStart(); render() });
 $("endMWrap").addEventListener("click", playFinale);
+// the bull and bear on the title screen do their finale moves too
+document.querySelectorAll(".land-m").forEach(w => w.addEventListener("click", () => { const bull = w.dataset.m === "bull";
+  w.classList.remove("rear","roar"); void w.getBoundingClientRect(); w.classList.add(bull ? "rear" : "roar"); finaleSound(bull) }));
 $("endUnlim").addEventListener("click", () => { closeDlg($("endDlg")); newUnlimited(); SFX.bell(); render() });
 $("homeBtn").addEventListener("click", () => { closeDlg($("endDlg")); loadDaily(); viewingDone = false; atHome = true; viewQ = 0; render() });
 $("copyBtn").addEventListener("click", () => { const t = shareText(), m = $("copyMsg");

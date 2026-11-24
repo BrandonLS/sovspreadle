@@ -70,10 +70,10 @@
     <section class="cert landing" id="landing" aria-labelledby="landTitle">
       <div class="band"><svg class="guil" aria-hidden="true"></svg><h1 id="landTitle"><span class="sov">Sov</span>Spreadle</h1></div>
       <p class="land-sub">The daily bond session</p>
-      <div class="vignette" aria-hidden="true">
-        <svg class="mascot"><use href="#bull"/></svg>
-        <span class="vs">vs</span>
-        <svg class="mascot"><use href="#bear"/></svg>
+      <div class="vignette">
+        <button type="button" class="land-m" data-m="bull" aria-label="Make the bull charge"><svg class="mascot" aria-hidden="true"><use href="#bull"/></svg></button>
+        <span class="vs" aria-hidden="true">vs</span>
+        <button type="button" class="land-m" data-m="bear" aria-label="Make the bear roar"><svg class="mascot" aria-hidden="true"><use href="#bear"/></svg><span class="roar-word" aria-hidden="true">Grrr!</span></button>
       </div>
       <p class="land-tag">Five mystery bonds a day. Name the country behind each 10-year yield chart and climb the credit ratings from D to AAA.</p>
       <ol class="slots" id="slots"></ol>
@@ -101,7 +101,7 @@
       <div class="controls" id="controls">
         <form id="form" autocomplete="off">
           <label for="q" id="qLabel">Your guess</label>
-          <div class="row"><input id="q" aria-describedby="msg"><button id="go">Guess</button><button type="button" id="allBtn" class="allbtn" aria-expanded="false" aria-controls="sugg">All countries</button></div>
+          <div class="row"><input id="q" aria-describedby="msg"><button id="go">Guess</button><button type="button" id="allBtn" class="allbtn" aria-expanded="false" aria-controls="sugg">All countries</button><button type="button" id="passBtn" class="allbtn passbtn">Pass</button></div>
           <p class="pool" id="pool"></p>
           <ul class="sugg" id="sugg"></ul>
           <p class="msg" id="msg" role="status"></p>
@@ -160,7 +160,7 @@
     <li>Each day's session has five bonds, the same for everyone: a headline (a famous episode from bond-market history), an easy or medium country, two guess-the-year rounds, and higher or lower.</li>
     <li>For most bonds you see ten years of a country's monthly 10-year government bond yield. Name the country. Each bond comes with 5 coupons: every guess clips one, and so does every hint.</li>
     <li>After a wrong guess you see how far off the yield level is (in basis points: 100 bp = 1 percentage point) and how closely the two lines move together ("shape"). Your guess is drawn on the chart.</li>
-    <li>Points: 4 if you get it with your first coupon, 3 with your second, 2 with your third, 1 after that. Using all 5 without the answer scores nothing, but costs nothing either. In guess the year, being within one year scores full points, and two or three years off scores half, rounded up. In higher or lower, each right answer is a point, and all three right is 4.</li>
+    <li>Points: 4 if you get it with your first coupon, 3 with your second, 2 with your third, 1 after that. Using all 5 without the answer scores nothing, but costs nothing either. Stuck? Pass (tap twice) gives up the bond and counts the coupons left as misses. In guess the year, being within one year scores full points, and two or three years off scores half, rounded up. In higher or lower, each right answer is a point, and all three right is 4.</li>
     <li>Your points, out of 20, set your rating, notch by notch like the agencies: 20 is AAA, 19 is AA+, 18 is AA, and so on down to D. BBB- (10 points) and above is investment grade.</li>
     <li>Hints: the region, the closest twin (the country whose yields moved most like this one over the same years, drawn on the chart), or zooming out five years each side. Each hint costs a coupon, and the last coupon is always kept for a guess.</li>
     <li>Other rounds: <b>Higher or lower</b> asks which of two countries yielded more in a given month, three times. <b>Guess the year</b> names the country and hides the dates: find the year of the marked point (a peak, a low or a famous moment). For famous moments, the "story" hint tells you what happened.</li>
