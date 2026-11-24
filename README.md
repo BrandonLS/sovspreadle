@@ -3,6 +3,8 @@
 A daily guessing game about government bond yields. Every day you get five charts of a country's 10-year
 government bond yield. Name the country, spend as few coupons as you can, and earn a credit rating from D to AAA.
 
+Play it at **https://sovspreadle.app**.
+
 ## How to play
 
 - **Five bonds a day**, the same for everyone. A new set starts at midnight, your local time.
