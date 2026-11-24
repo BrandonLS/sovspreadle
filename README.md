@@ -11,15 +11,19 @@ government bond yield. Name the country, spend as few coupons as you can, and ea
 - **Wrong guesses still help.** Your guess is drawn as a dashed line on the chart, with how far it was from the
   answer in basis points and how similar its shape was.
 - **Hints:** the region, the country that moved most like the answer, or five more years on each side of the window.
-- **Bond 1 is a headline:** a famous moment in bond-market history.
-- **Bond 4 is a twist** that rotates daily: the spread over Germany, higher or lower, or guess the year of a peak,
-  a low or a famous event.
+- **The five bonds, in order:**
+  1. **Headline:** guess the country behind a famous moment in bond-market history.
+  2. **Easy or medium:** guess the country.
+  3. **Guess the year:** the country is named; find the year of a marked peak, low or famous moment.
+  4. **Guess the year** again, with another country.
+  5. **Higher or lower:** three times, pick which of two countries paid more to borrow in a given month.
 - **Scoring:** 4 points for the first coupon, 3 for the second, 2 for the third, 1 after that, 0 for a miss.
   Your total out of 20 sets your rating, one notch per point. Only a perfect 20 is AAA, and BBB- (11 points)
   is investment grade.
 - **After each bond** you see the full history of that country's yield and, often, a short story about what
   happened in those years.
-- **Play unlimited** for extra rounds that don't count toward your streak.
+- **Play unlimited** for extra rounds that don't count toward your streak. Unlimited sometimes swaps in a
+  spread round: the chart shows the gap over German yields, and you name the country.
 
 When you finish, share your result: a grid of colored squares that doesn't give the answers away.
 

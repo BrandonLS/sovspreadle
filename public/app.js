@@ -357,14 +357,14 @@ function renderLadder(flash){
 }
 function renderLanding(){
   const done = sess.done, inprog = sess.started && !done && sess.rs.some(x=>x.done || x.g.length);
-  $("slots").innerHTML = plan.map((r,i)=>`<li><b>${i+1}</b>${r.k==="headline"?"Headline":r.t==="spread"?"Spread twist":r.t==="hl"?"Higher or lower":r.t==="year"?"Guess the year":"Bond"}</li>`).join("");
+  $("slots").innerHTML = plan.map((r,i)=>`<li><b>${i+1}</b>${KIND[r.k] || "Bond"}</li>`).join("");
   $("startBtn").textContent = done ? "See today's results" : inprog ? `Resume session, bond ${Math.min(5, sess.cur + (sess.rs[sess.cur].done ? 2 : 1))} of 5` : "Ring the opening bell";
   const st = streakNow(), stTxt = st ? ` Streak: ${st} day${st>1?"s":""}.` : "";
   $("landNote").textContent = done ? `Today's rating: ${gradeOf(sess.score)} (${sess.score} of ${MAXPTS}). Next session in ${untilMidnight()}.${stTxt}` : `Session no. ${dayN}, ${dayLabel}. Same five bonds for everyone today.${stTxt}`;
 }
 function renderRound(){
   const r = rd(), s = rs(), done = s.done;
-  const kind = r.k === "headline" ? "Headline bond" : KIND[r.k] || "Bond";
+  const kind = KIND[r.k] || "Bond";
   $("kicker").textContent = `Bond ${sess.cur+1} of 5: ${kind}`;
   const winTxt = `${mlabel(r.s)} to ${mlabel(r.s+W-1)}`;
   let q = "", facts = [];

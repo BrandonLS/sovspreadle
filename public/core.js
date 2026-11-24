@@ -30,7 +30,7 @@ const RATINGS = [
   {r:"AA",d:"High grade",l:"S&P cut the US to AA+ in August 2011, its first downgrade."},
   {r:"AAA",d:"Prime",l:"Germany and Switzerland have long held this rating."}
 ];
-const KIND = {headline:"Headline bond",easy:"Bond",medium:"Bond",hard:"Bond",spread:"Twist: spread",hl:"Twist: higher or lower",year:"Twist: guess the year"};
+const KIND = {headline:"Headline",easy:"Easy",medium:"Medium",hard:"Hard",spread:"Spread vs Germany",hl:"Higher or lower",year:"Guess the year"};
 const W = 120, ROUNDS = 5, COUPONS = 5, QS = 3, EPOCH = Date.UTC(2026, 10, 22);
 const ptsFor = used => used === 1 ? 4 : used === 2 ? 3 : used === 3 ? 2 : 1;
 const MAXPTS = 20, IG = 11;
@@ -169,12 +169,13 @@ function buildPlan(seed, n, ctx){
   if(!eps.length) eps = EPS.filter(e=>epOk(ctx, e, false));
   if(!eps.length) eps = EPS;
   const ep = pick(r, eps);
+  // the order: a headline, an easy or medium country, two guess-the-year rounds, then higher or lower.
+  // Unlimited sessions (n null) swap the second year round for the spread round half the time.
   rounds.push({t:"country", k:"headline", c:ep.c, s:ep.si, ep:ep.i}); used.add(ep.c);
-  rounds.push(genCountry(r, used, "easy", ctx));
-  rounds.push(genCountry(r, used, "medium", ctx));
-  const types = ["spread","hl","year"];
-  rounds.push(genTwist(r, used, n ? types[(n-1)%3] : pick(r, types), ctx));
-  rounds.push(genCountry(r, used, "hard", ctx));
+  rounds.push(genCountry(r, used, r() < .5 ? "easy" : "medium", ctx));
+  rounds.push(genTwist(r, used, "year", ctx));
+  rounds.push(genTwist(r, used, !n && r() < .5 ? "spread" : "year", ctx));
+  rounds.push(genTwist(r, used, "hl", ctx));
   return rounds;
 }
 // daily plans are built in order from day 1, so each day knows what came before
