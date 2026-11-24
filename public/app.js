@@ -164,6 +164,8 @@ function finishRound(pts){
   if(pts > 0){SFX.kaching(); setTimeout(SFX.stamp, 260)} else {SFX.growl(); setTimeout(SFX.stamp, 380)}
   render();
   setTimeout(()=>{ const r = $("reveal"); if(r && !r.hidden) r.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"nearest"}) }, 120);
+  // after the last bond, the rating opens by itself once the answer has landed (the button still reopens it)
+  if(sess.done){ const at = sess; setTimeout(()=>{ if(sess === at && !atHome && !$("endDlg").open) openEnd(true) }, 1500) }
 }
 function guessCountry(code){
   const r = rd(), s = rs(), msg = $("msg"); msg.textContent = "";
