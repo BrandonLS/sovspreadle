@@ -174,7 +174,7 @@ function guessCountry(code){
   if(part != null && pendingPartial !== sess.cur+":"+code){ pendingPartial = sess.cur+":"+code;
     msg.textContent = `${name(code)} only has data for part of this window (from ${yearOf(part)}). Press Guess again to use a coupon on it.`; return }
   pendingPartial = null;
-  s.g.push(code); s.seq.push({k:"g", v:code}); $("q").value = "";
+  s.g.push(code); s.seq.push({k:"g", v:code}); $("q").value = ""; browsing = false;
   if(code === r.c) finishRound(ptsFor(s.seq.length));
   else if(s.seq.length >= COUPONS) finishRound(0);
   else {SFX.bonk(); save(); render(); $("q").focus()}
@@ -312,21 +312,32 @@ function guil(svg){ const w = svg.clientWidth || 800, h = svg.clientHeight || 86
   svg.innerHTML = p }
 
 /* ---------- rendering ---------- */
-function resolve(t){ t = t.trim().toLowerCase(); if(!t) return null; if(ALIAS[t]) return ALIAS[t];
-  const up = t.toUpperCase(); if(C[up] && keys.includes(up)) return up; return keys.find(k=>name(k).toLowerCase()===t) || null }
-function matchAll(){ const t = $("q").value.trim().toLowerCase(), r = rd(), s = rs(); if(!t || r.t==="year" || r.t==="hl") return [];
-  const hit = k => name(k).toLowerCase().includes(t) || k.toLowerCase()===t || ALIAS[t]===k, pre = k => name(k).toLowerCase().startsWith(t) ? 0 : 1;
-  return keys.filter(k=>!s.g.includes(k) && hit(k)).map(k=>({k, ok: hasData(r,k)}))
-    .sort((p,q)=>(q.ok-p.ok) || (pre(p.k)-pre(q.k))).slice(0,6) }
+// every country with data can be guessed, including guess-only ones (like Iceland) that are never the answer
+const guessable = () => Object.keys(C).filter(k=>D.series[k]);
+function resolve(t){ t = t.trim().toLowerCase(); if(!t) return null; if(ALIAS[t] && D.series[ALIAS[t]]) return ALIAS[t];
+  const up = t.toUpperCase(); if(C[up] && D.series[up]) return up; return guessable().find(k=>name(k).toLowerCase()===t) || null }
+// browsing: the full country list is open (from the "All countries" button or a click into the empty box)
+let browsing = false;
+const REGION_ORDER = ["Northern Europe","Western Europe","Southern Europe","Eastern Europe","Americas","Asia-Pacific","Middle East and Africa"];
+function matchAll(){ const t = $("q").value.trim().toLowerCase(), r = rd(), s = rs(); if((!t && !browsing) || r.t==="year" || r.t==="hl") return [];
+  const hit = k => !t || name(k).toLowerCase().includes(t) || k.toLowerCase()===t || ALIAS[t]===k, pre = k => name(k).toLowerCase().startsWith(t) ? 0 : 1;
+  const out = guessable().filter(k=>!s.g.includes(k) && hit(k)).map(k=>({k, ok: hasData(r,k)}));
+  if(!t) return out.sort((p,q)=>name(p.k).localeCompare(name(q.k)));
+  return out.sort((p,q)=>(q.ok-p.ok) || (pre(p.k)-pre(q.k))).slice(0, browsing ? 99 : 6) }
 function matches(){ return matchAll().filter(m=>m.ok).map(m=>m.k) }
 const yearsOf = r => `${yearOf(r.s)} to ${yearOf(r.s+W-1)}`;
 let pendingPartial = null;
 // first month with data when a country covers less than 80% of the window, else null
 function partialFrom(r, k){ if(k === r.c) return null; const b = seriesFor(r, k); let n = 0, f = null;
   for(let i=r.s;i<r.s+W;i++) if(b[i]!=null){ n++; if(f == null) f = i } return n < W*.8 ? f : null }
-function renderSugg(){ const r = rd();
-  $("sugg").innerHTML = matchAll().map(m=>m.ok ? `<li><button type="button" data-k="${m.k}">${esc(name(m.k))}${partialFrom(r, m.k) != null ? `<span class="part">from ${yearOf(partialFrom(r, m.k))}</span>` : ""}</button></li>`
-    : `<li><button type="button" class="nodata" disabled title="No data for ${yearsOf(r)}">${esc(name(m.k))}<span>no data for ${yearsOf(r)}</span></button></li>`).join("") }
+function renderSugg(){ const r = rd(), list = matchAll(), all = browsing && !$("q").value.trim();
+  const chip = m => m.ok ? `<li><button type="button" data-k="${m.k}">${esc(name(m.k))}${partialFrom(r, m.k) != null ? `<span class="part">from ${yearOf(partialFrom(r, m.k))}</span>` : ""}</button></li>`
+    : `<li><button type="button" class="nodata" disabled title="No data for ${yearsOf(r)}">${esc(name(m.k))}<span>no data</span></button></li>`;
+  $("sugg").classList.toggle("browse", all);
+  $("sugg").innerHTML = all
+    ? REGION_ORDER.map(g=>{ const ms = list.filter(m=>C[m.k][1]===g); return ms.length ? `<li class="grp">${g}</li>` + ms.map(chip).join("") : "" }).join("")
+    : list.map(chip).join("");
+  const ab = $("allBtn"); if(ab){ ab.setAttribute("aria-expanded", browsing); ab.hidden = r.t === "year" || r.t === "hl" } }
 
 function renderHeader(){
   $("sessionLbl").textContent = mode === "daily" ? `Session no. ${dayN}, ${dayLabel}` : "Unlimited session, not counted";
@@ -395,7 +406,7 @@ function renderRound(){
   if(!done && !isHL){
     $("qLabel").textContent = r.t === "year" ? "Your guess: a year (exact scores most; one year off still counts)" : "Your guess: a country";
     const inp = $("q"); inp.placeholder = r.t === "year" ? "e.g. 1981" : "Type a country"; inp.inputMode = r.t === "year" ? "numeric" : "text";
-    $("pool").textContent = r.t === "year" ? "Each wrong guess tells you earlier or later." : `${keys.filter(k=>hasData(r,k)).length} of ${keys.length} countries have data in this window.`;
+    $("pool").textContent = r.t === "year" ? "Each wrong guess tells you earlier or later." : `${guessable().filter(k=>hasData(r,k)).length} of ${guessable().length} countries have data in this window.`;
     renderSugg();
   }
   // hints
@@ -513,6 +524,9 @@ function closeDlg(d){ if(d.open){ try{ d.close() }catch(e){ d.removeAttribute("o
 $("form").addEventListener("submit", e => { e.preventDefault(); const r = rd(); if(rs().done) return;
   if(r.t === "year") guessYear($("q").value); else guessCountry(resolve($("q").value)) });
 $("q").addEventListener("input", () => { $("msg").textContent = ""; pendingPartial = null; renderSugg() });
+$("q").addEventListener("click", () => { if(!$("q").value.trim() && !browsing){ browsing = true; renderSugg() } });
+$("q").addEventListener("keydown", e => { if(e.key === "Escape" && browsing){ browsing = false; renderSugg() } });
+$("allBtn").addEventListener("click", () => { browsing = !browsing; if(browsing) $("q").value = ""; renderSugg(); $("q").focus() });
 $("sugg").addEventListener("click", e => { const b = e.target.closest("button"); if(b) guessCountry(b.dataset.k) });
 $("hints").addEventListener("click", e => { const b = e.target.closest("button[data-h]"); if(b) useHint(b.dataset.h) });
 $("hlq").addEventListener("click", e => { const b = e.target.closest("button"); if(!b) return;

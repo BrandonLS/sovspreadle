@@ -230,3 +230,9 @@ label{display:block;font-weight:600;margin-bottom:6px}
 .sugg button .part{margin-left:6px;font-size:12px;font-weight:400;color:var(--ink2)}
 .foot a{margin-left:12px;white-space:nowrap}
 .sov{color:var(--stamp);font-weight:500}
+/* full country list, grouped by region */
+.allbtn{background:transparent;color:var(--ink);border:1px solid var(--ink);font-weight:600;white-space:nowrap}
+.sugg.browse{max-height:320px;overflow:auto;padding:4px 2px 8px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sugg .grp{flex:1 1 100%;font-weight:600;font-size:13px;color:var(--ink2);margin:8px 0 0}
+@media (max-width:520px){.allbtn{padding-inline:10px}}
+@media (max-width:520px){.row{flex-wrap:wrap}.row #q{flex:1 1 100%}.row #go,.row .allbtn{flex:1 1 0}}
