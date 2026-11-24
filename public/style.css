@@ -245,3 +245,5 @@ label{display:block;font-weight:600;margin-bottom:6px}
 .candle.flat{background:var(--ink2);border-color:var(--ink2);border-width:1px}.candle.flat::before{background:var(--ink2)}
 .pip .wick .candle.big{height:28px}.pip .wick .candle.mid{height:17px}.pip .wick .candle.small{height:8px}.pip .wick .candle.flat{height:3px;border-radius:0}
 .candle.small::before,.candle.mid::before{top:-5px;bottom:-5px}
+
+.foot .by{display:block;margin-top:8px}
