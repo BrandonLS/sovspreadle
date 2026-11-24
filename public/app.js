@@ -5,7 +5,7 @@
 const $ = id => document.getElementById(id);
 
 /* ---------- sound (synthesized, no files) ---------- */
-const prefs = Object.assign({snd:true, mus:true}, store.get("spreadle-prefs") || {});
+const prefs = Object.assign({snd:true, mus:true}, store.get("sovspreadle-prefs") || {});
 let actx = null, master = null;
 function ac(){
   if(!actx){const A = window.AudioContext || window.webkitAudioContext; if(!A) return null;
@@ -84,29 +84,28 @@ function playFinale(){ const m = $("endMascot"), bull = rungOf(sess.score) >= 5,
 // a short note with a date-free hint (h) can tell the story of a peak or low in a guess-the-year round
 function storyNote(r){ if(r.t !== "year" || r.ep != null) return -1;
   return NOTES.findIndex(n=>n.c === r.c && n.h && ix(n.a) <= r.pk && r.pk <= ix(n.b) && ix(n.b) - ix(n.a) <= 12) }
-function noteFor(c, s){ let best = -1, bl = 1e9; const seen = store.get("spreadle-notes") || {}, now = Date.now();
+function noteFor(c, s){ let best = -1, bl = 1e9; const seen = store.get("sovspreadle-notes") || {}, now = Date.now();
   NOTES.forEach((n, i)=>{ if(n.c !== c) return; const a = ix(n.a), b = ix(n.b), len = b-a+1, ov = Math.min(b, s+W-1) - Math.max(a, s) + 1;
     if(a < s || a > s+W-1 || ov < Math.min(24, len) || (seen[i] && now-seen[i] < 30*864e5)) return;
     if(len < bl){ bl = len; best = i } });
-  if(best >= 0){ seen[best] = now; store.set("spreadle-notes", seen) }
+  if(best >= 0){ seen[best] = now; store.set("sovspreadle-notes", seen) }
   return best }
 /* ---------- session state ---------- */
 let dayN, dayLabel, plan, sess, mode = "daily", viewQ = 0, revealAnim = false, viewingDone = false, atHome = true;
 function freshSession(rounds, n){ return {n, sig: hash(JSON.stringify(rounds)), cur:0, score:0, done:false, started:false, rs: rounds.map(()=>({g:[], h:[], seq:[], done:false, pts:0}))} }
-// storage keys keep their original "spreadle-" names so saved progress and streaks survive the rename
-function save(){ if(mode === "daily") store.set("spreadle-session4", sess) }
+function save(){ if(mode === "daily") store.set("sovspreadle-session", sess) }
 function loadDaily(){
   mode = "daily"; plan = dailyPlan(dayN);
-  const saved = store.get("spreadle-session4"), sig = hash(JSON.stringify(plan));
+  const saved = store.get("sovspreadle-session"), sig = hash(JSON.stringify(plan));
   sess = saved && saved.n === dayN && saved.sig === sig ? saved : freshSession(plan, dayN);
 }
 // unlimited avoids the daily bonds from a week back to a week ahead, and your own recent unlimited bonds
 function newUnlimited(){ mode = "unlimited";
   const today = Math.max(1, dayN); dailyPlan(today + 7); const ent = [];
   for(let d=Math.max(1, today-7); d<=today+7; d++) for(const h of answersOf(PLANS[d], d)) ent.push({...h, d: d===today ? 1e9 : 0, epd: Math.abs(d-today) <= 7});
-  const mine = store.get("spreadle-unlim") || []; mine.forEach((h,i)=>ent.push({c:h.c, s:h.s, d: i >= mine.length-5 ? 1e9 : 0, ep:h.ep, epd: h.ep != null && i >= mine.length-15}));
+  const mine = store.get("sovspreadle-unlim") || []; mine.forEach((h,i)=>ent.push({c:h.c, s:h.s, d: i >= mine.length-5 ? 1e9 : 0, ep:h.ep, epd: h.ep != null && i >= mine.length-15}));
   plan = buildPlan("unlimited-"+Date.now()+Math.random(), null, ctxOf(ent, 1e9));
-  store.set("spreadle-unlim", [...mine, ...plan.filter(x=>x.c).map(x=>({c:x.c, s:x.s, ep:x.ep}))].slice(-40));
+  store.set("sovspreadle-unlim", [...mine, ...plan.filter(x=>x.c).map(x=>({c:x.c, s:x.s, ep:x.ep}))].slice(-40));
   sess = freshSession(plan, null); sess.started = true; viewQ = 0 }
 
 /* ---------- comparisons and facts ---------- */
@@ -224,14 +223,14 @@ function start(){
 }
 
 /* ---------- stats ---------- */
-function streakNow(){ const S = store.get("spreadle-stats2"); return S && S.s && (S.last === dayN || S.last === dayN-1) ? S.s : 0 }
+function streakNow(){ const S = store.get("sovspreadle-stats"); return S && S.s && (S.last === dayN || S.last === dayN-1) ? S.s : 0 }
 function recordStats(){
-  const S = store.get("spreadle-stats2") || {p:0, s:0, b:0, ig:0, last:0, dist:{}};
+  const S = store.get("sovspreadle-stats") || {p:0, s:0, b:0, ig:0, last:0, dist:{}};
   if(S.last === dayN) return;
   const rr = RATINGS[rungOf(sess.score)].r;
   S.p++; S.s = S.last === dayN-1 ? S.s+1 : 1; S.b = Math.max(S.b, S.s); S.last = dayN;
   if(rungOf(sess.score) >= 5) S.ig++;
-  S.dist[rr] = (S.dist[rr]||0)+1; store.set("spreadle-stats2", S);
+  S.dist[rr] = (S.dist[rr]||0)+1; store.set("sovspreadle-stats", S);
 }
 
 /* ---------- chart ---------- */
@@ -526,7 +525,7 @@ function openEnd(fresh){
   $("sharePre").textContent = shareText(); $("copyMsg").textContent = "";
   $("copyBtn").hidden = false;
   if(mode === "daily"){
-    const S = store.get("spreadle-stats2") || {p:0,s:0,b:0,ig:0,dist:{}};
+    const S = store.get("sovspreadle-stats") || {p:0,s:0,b:0,ig:0,dist:{}};
     $("stats").innerHTML = [["Played",S.p],["Investment grade",S.p?Math.round(S.ig/S.p*100)+"%":"0%"],["Streak",S.s],["Best streak",S.b]].map(([l,v])=>`<div><b>${v}</b><span>${l}</span></div>`).join("");
     const mx = Math.max(1, ...RATINGS.map(x=>S.dist[x.r]||0));
     $("dist").innerHTML = [...RATINGS].reverse().map(x=>`<div class="${x.r===R.r?"me":""}"><span>${x.r}</span><i style="width:${Math.max(4,(S.dist[x.r]||0)/mx*100)}%">${S.dist[x.r]||0}</i></div>`).join("");
@@ -562,8 +561,8 @@ $("helpBtn").addEventListener("click", () => { const d = $("helpDlg"); try{ d.sh
 document.querySelectorAll(".dlg").forEach(d => { d.addEventListener("click", e => { if(e.target.closest("[data-close]")) closeDlg(d);
   else if(e.target === d){ const rc = d.getBoundingClientRect(); if(e.clientX<rc.left||e.clientX>rc.right||e.clientY<rc.top||e.clientY>rc.bottom) closeDlg(d) } }) });
 $("endDlg").addEventListener("close", () => { if(mode === "daily" && sess.done && !atHome){ viewingDone = true; render() } });
-$("sndBtn").addEventListener("click", () => { prefs.snd = !prefs.snd; store.set("spreadle-prefs", prefs); if(prefs.snd){ ac(); SFX.click() } renderHeader() });
-$("musBtn").addEventListener("click", () => { prefs.mus = !prefs.mus; store.set("spreadle-prefs", prefs); if(prefs.mus) musicStart(); else musicStop(); renderHeader() });
+$("sndBtn").addEventListener("click", () => { prefs.snd = !prefs.snd; store.set("sovspreadle-prefs", prefs); if(prefs.snd){ ac(); SFX.click() } renderHeader() });
+$("musBtn").addEventListener("click", () => { prefs.mus = !prefs.mus; store.set("sovspreadle-prefs", prefs); if(prefs.mus) musicStart(); else musicStop(); renderHeader() });
 const ro = new ResizeObserver(() => { if(!plan || !sess) return; if(!$("game").hidden){ drawMain(); drawHist(); guil(document.querySelector(".strip .guil")) } else guil(document.querySelector("#landing .guil")) });
 [$("fig"), document.querySelector(".fig.full"), document.querySelector("#landing .band")].forEach(el => ro.observe(el));
 

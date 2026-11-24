@@ -191,7 +191,7 @@ function dailyPlan(n){
   for(let d=1; d<=n; d++){ if(PLANS[d]) continue;
     if(FROZEN[d]){ PLANS[d] = decodePlan(FROZEN[d]); continue }
     const ent = []; for(let e=Math.max(1, d-HIST); e<d; e++) for(const h of answersOf(PLANS[e], e)) ent.push({...h, epd: h.ep != null && e >= d-EP_GAP});
-    PLANS[d] = buildPlan("spreadle-day-"+d, d, ctxOf(ent, d-COOL+1)) }
+    PLANS[d] = buildPlan("sovspreadle-day-"+d, d, ctxOf(ent, d-COOL+1)) }
   return PLANS[n];
 }
 const epOf = rd => EPS.find(e=>e.i===rd.ep);
