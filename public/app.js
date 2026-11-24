@@ -344,9 +344,20 @@ function renderHeader(){
   $("sndBtn").setAttribute("aria-pressed", prefs.snd); $("musBtn").setAttribute("aria-pressed", prefs.mus);
 }
 function roundTier(i){ const s = sess.rs[i]; if(!s.done) return null; return s.pts >= 4 ? 0 : s.pts === 3 ? 1 : s.pts >= 1 ? 2 : 3 }
+// each finished bond is a market candle: solved on coupon 1, 2, 3 = big, medium, small green; coupon 4 = flat;
+// coupon 5 = small red; missed = big red. Higher or lower: 3, 2, 1, 0 right = big green, small green, small red, big red.
+// Guess the year one year off counts one size smaller than the exact year.
+const CANDLES = [["up","big"],["up","mid"],["up","small"],["flat","flat"],["down","small"],["down","big"]];
+const CANDLE_TXT = {"up big":"big green candle","up mid":"medium green candle","up small":"small green candle","flat flat":"flat candle","down small":"small red candle","down big":"big red candle"};
+function candleOf(i){ const s = sess.rs[i], r = plan[i]; if(!s.done) return null;
+  if(r.t === "hl"){ const n = s.right ?? Math.min(3, s.pts); return CANDLES[[5,4,2,0][n]] }
+  if(s.pts <= 0) return CANDLES[5];
+  let k = Math.min(4, s.seq.length - 1);
+  if(r.t === "year" && s.pts < ptsFor(s.seq.length)) k = Math.min(4, k + 1);
+  return CANDLES[k] }
 function renderPips(){
-  $("pips").innerHTML = plan.map((r,i)=>{const t = roundTier(i), cur = i===sess.cur && !sess.done;
-    return `<li class="pip${cur?" cur":""}"><span class="candle" style="${t!=null?`background:${TIERC[t]};border-color:${TIERC[t]}`:""}"></span>${i+1}</li>`}).join("");
+  $("pips").innerHTML = plan.map((r,i)=>{const c = candleOf(i), cur = i===sess.cur && !sess.done;
+    return `<li class="pip${cur?" cur":""}" aria-label="Bond ${i+1}${c ? ": " + CANDLE_TXT[c.join(" ")] : cur ? ": in play" : ""}"><span class="wick"><span class="candle${c ? " " + c.join(" ") : ""}"></span></span>${i+1}</li>`}).join("");
   const r = rd(), s = rs(), n = r.t === "hl" ? 0 : COUPONS;
   $("tokens").innerHTML = n ? `<span>Coupons left</span>` + Array.from({length:n},(_,i)=>`<svg class="${i>=n-s.seq.length?"used":""}"><use href="#coin"/></svg>`).join("") : "";
 }

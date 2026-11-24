@@ -236,3 +236,12 @@ label{display:block;font-weight:600;margin-bottom:6px}
 .sugg .grp{flex:1 1 100%;font-weight:600;font-size:13px;color:var(--ink2);margin:8px 0 0}
 @media (max-width:520px){.allbtn{padding-inline:10px}}
 @media (max-width:520px){.row{flex-wrap:wrap}.row #q{flex:1 1 100%}.row #go,.row .allbtn{flex:1 1 0}}
+/* progress candles: size and color show how each bond went */
+.pip .wick{position:relative;height:40px;display:flex;align-items:center;justify-content:center}
+.pip .wick .candle{height:26px}
+.candle.up{background:var(--hit);border-color:var(--hit)}
+.candle.down{background:var(--far);border-color:var(--far)}
+.candle.up::before{background:var(--hit)}.candle.down::before{background:var(--far)}
+.candle.flat{background:var(--ink2);border-color:var(--ink2);border-width:1px}.candle.flat::before{background:var(--ink2)}
+.pip .wick .candle.big{height:28px}.pip .wick .candle.mid{height:17px}.pip .wick .candle.small{height:8px}.pip .wick .candle.flat{height:3px;border-radius:0}
+.candle.small::before,.candle.mid::before{top:-5px;bottom:-5px}
