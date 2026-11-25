@@ -133,7 +133,7 @@ function genCountry(r, used, level, ctx){
   used.add(w.c); return {t:"country", k:level, c:w.c, s:w.s};
 }
 function epOk(ctx, e, strict){ return !ctx.eps.has(e.i) && (!strict || (!ctx.cool.has(e.c) && !clash(ctx, e.c, e.si))) }
-function genTwist(r, used, type, ctx){
+function genTwist(r, used, type, ctx, must){
   if(type === "spread"){
     const codes = [...EASY, ...MED, ...HARD].filter(k=>k!=="DE" && !used.has(k));
     const w = pickWin(r, codes, 0, CUT, (k,s)=>validSet.DE.has(s) && rangeOf(spreadOf(k), s) >= 1, ctx);
@@ -141,7 +141,10 @@ function genTwist(r, used, type, ctx){
   }
   if(type === "year"){
     const roll = r();
-    if(roll < EVP){ const evs = EPS.filter(e=>e.evi!=null && !used.has(e.c) && epOk(ctx, e, true));
+    // must: this year round has to be a dated event (every day gets at least one story); relax the variety rules if needed
+    if(must || roll < EVP){ let evs = EPS.filter(e=>e.evi!=null && !used.has(e.c) && epOk(ctx, e, true));
+      if(!evs.length && must) evs = EPS.filter(e=>e.evi!=null && !used.has(e.c) && epOk(ctx, e, false));
+      if(!evs.length && must) evs = EPS.filter(e=>e.evi!=null && !used.has(e.c));
       if(evs.length){ const e = pick(r, evs); used.add(e.c); return {t:"year", k:"year", ym:"event", c:e.c, s:e.si, pk:e.evi, ep:e.i} } }
     const low = roll >= EVP + (1-EVP)/2, codes = [...EASY, ...MED].filter(k=>!used.has(k));
     const ok = (k,s)=>{const a=D.series[k], p=low ? troughOf(a,s) : peakOf(a,s); if(p-s<6 || s+W-1-p<6) return false;
@@ -177,7 +180,7 @@ function buildPlan(seed, n, ctx){
   // Unlimited sessions (n null) swap the second year round for the spread round half the time.
   rounds.push({t:"country", k:"headline", c:ep.c, s:ep.si, ep:ep.i}); used.add(ep.c);
   rounds.push(genCountry(r, used, r() < .5 ? "easy" : "medium", ctx));
-  rounds.push(genTwist(r, used, "year", ctx));
+  rounds.push(genTwist(r, used, "year", ctx, true));
   rounds.push(genTwist(r, used, !n && r() < .5 ? "spread" : "year", ctx));
   rounds.push(genTwist(r, used, "hl", ctx));
   return rounds;
