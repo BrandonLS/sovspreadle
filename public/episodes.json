@@ -451,5 +451,392 @@
 "ev": "1994-09",
 "q": "A global bond rout and a budget deficit of over 10% of GDP.",
 "yo": true
+},
+{
+"c": "US",
+"s": "2008-06",
+"t": "The taper tantrum",
+"f": "In May and June 2013 Fed chair Ben Bernanke signaled that the Fed could slow its bond buying. The \"taper tantrum\" sent the 10-year Treasury from 1.76% in April to 2.81% in September.",
+"ev": "2013-06",
+"q": "The central bank hinted it might slow its bond buying, and traders threw what became known as a tantrum.",
+"yo": true
+},
+{
+"c": "US",
+"s": "2003-12",
+"t": "Rates at zero",
+"f": "In December 2008 the Fed cut its policy rate to near zero for the first time. The 10-year Treasury fell from 3.53% in November to 2.42%.",
+"ev": "2008-12",
+"q": "The central bank cut its policy rate to near zero for the first time.",
+"yo": true
+},
+{
+"c": "US",
+"s": "2006-08",
+"t": "The US loses its AAA",
+"f": "In August 2011 S&P cut the US credit rating from AAA for the first time. Investors bought Treasuries anyway: the 10-year yield fell from 3.00% in July to 1.98% in September.",
+"ev": "2011-08",
+"q": "A rating agency took away the country's top credit rating for the first time, and yields fell anyway.",
+"yo": true
+},
+{
+"c": "US",
+"s": "1982-10",
+"t": "Black Monday",
+"f": "On October 19, 1987, Black Monday, the Dow Jones fell 22.6% in a single day. The 10-year Treasury, at 9.52% that month, fell to 8.86% in November.",
+"ev": "1987-10",
+"q": "The stock market had its worst day ever, losing more than a fifth of its value in one session.",
+"yo": true
+},
+{
+"c": "US",
+"s": "1993-09",
+"t": "The LTCM rescue",
+"f": "In September 1998 the New York Fed organized a rescue of the hedge fund Long-Term Capital Management. The 10-year Treasury fell to 4.53% in October.",
+"ev": "1998-09",
+"q": "A giant hedge fund collapsed, and the central bank organized its rescue by Wall Street banks.",
+"yo": true
+},
+{
+"c": "US",
+"s": "2016-10",
+"t": "The fastest hikes in 40 years",
+"f": "In 2022 the Fed raised rates faster than at any time since the early 1980s. The 10-year Treasury reached 3.98% in October 2022, up from 1.58% a year earlier.",
+"ev": "2022-10",
+"q": "The central bank was raising rates at its fastest pace in four decades.",
+"yo": true
+},
+{
+"c": "US",
+"s": "1975-03",
+"t": "Carter's credit controls",
+"f": "In March 1980 President Jimmy Carter imposed credit controls to fight inflation. The 10-year Treasury peaked at 12.75% that month, then fell to 9.78% by June.",
+"ev": "1980-03",
+"q": "The president imposed controls on credit to fight inflation.",
+"yo": true
+},
+{
+"c": "DE",
+"s": "2014-08",
+"t": "The Bund's record low",
+"f": "In August 2019 Germany's 10-year yield averaged -0.65%, its lowest ever: investors were paying to lend to the government.",
+"ev": "2019-08",
+"q": "Investors paid the government more than ever before to lend it money for 10 years.",
+"yo": true
+},
+{
+"c": "DE",
+"s": "1987-07",
+"t": "The Bundesbank tightens",
+"f": "In July 1992 the Bundesbank raised its discount rate to 8.75%, the highest since 1931. Weeks later Europe's exchange-rate system was in crisis.",
+"ev": "1992-07",
+"q": "The central bank raised its discount rate to the highest in six decades, and Europe's currency grid started to crack.",
+"yo": true
+},
+{
+"c": "DE",
+"s": "2010-04",
+"t": "The Bund tantrum",
+"f": "Germany's 10-year yield fell to 0.12% in April 2015, weeks after the ECB began buying government bonds, then jumped to 0.79% by June in the \"Bund tantrum.\"",
+"ev": "2015-04",
+"q": "Weeks after the central bank began buying government bonds, the yield nearly hit zero, then spiked.",
+"yo": true
+},
+{
+"c": "FR",
+"s": "1978-03",
+"t": "The turn to austerity",
+"f": "In March 1983 President François Mitterrand chose to keep the franc in the European Monetary System and turned to austerity, the \"tournant de la rigueur.\"",
+"ev": "1983-03",
+"q": "The Socialist government dropped its spending program and turned to austerity to defend the currency.",
+"yo": true
+},
+{
+"c": "FR",
+"s": "1988-08",
+"t": "The ERM bands widen",
+"f": "On August 2, 1993, after speculators attacked the franc, Europe's exchange-rate bands were widened to 15% either side. France's 10-year yield fell from 6.75% in July to 5.98% in October.",
+"ev": "1993-08",
+"q": "After speculators attacked the currency, Europe's exchange-rate bands were widened to 15% either side.",
+"yo": true
+},
+{
+"c": "FR",
+"s": "1987-09",
+"t": "The petit oui",
+"f": "On September 20, 1992, French voters approved the Maastricht Treaty with 51% of the vote.",
+"ev": "1992-09",
+"q": "Voters approved a new European treaty by just 51%.",
+"yo": true
+},
+{
+"c": "FR",
+"s": "1963-05",
+"t": "May 68",
+"f": "In May 1968 student protests and a general strike brought France to a standstill. Capital fled, and the franc came under heavy pressure that autumn.",
+"ev": "1968-05",
+"q": "Student protests and a nationwide general strike brought the country to a standstill.",
+"yo": true
+},
+{
+"c": "IT",
+"s": "1987-07",
+"t": "The overnight levy",
+"f": "In July 1992 Italy's government took 0.6% from every bank account overnight to help cut the deficit. Two months later the lira left the ERM.",
+"ev": "1992-07",
+"q": "The government took 0.6% out of every bank account overnight.",
+"yo": true
+},
+{
+"c": "IT",
+"s": "2016-07",
+"t": "Draghi resigns",
+"f": "In July 2022 Mario Draghi resigned as prime minister after his coalition fell apart. Italy's 10-year yield rose from 3.36% that month to 4.53% in October.",
+"ev": "2022-07",
+"q": "The prime minister, a former central banker, resigned after his coalition fell apart.",
+"yo": true
+},
+{
+"c": "GR",
+"s": "2005-05",
+"t": "The first bailout",
+"f": "In May 2010 Greece agreed a €110 billion bailout with the EU and the IMF, the first of three. Its 10-year yield still rose from 7.97% that month to 10.70% by August.",
+"ev": "2010-05",
+"q": "The country agreed the first of three EU-IMF bailouts.",
+"yo": true
+},
+{
+"c": "IE",
+"s": "2003-09",
+"t": "The bank guarantee",
+"f": "On September 30, 2008, Ireland guaranteed the deposits and debts of its six main banks, about €440 billion.",
+"ev": "2008-09",
+"q": "The government guaranteed the deposits and debts of its six main banks overnight.",
+"yo": true
+},
+{
+"c": "IE",
+"s": "1981-08",
+"t": "The punt devalued",
+"f": "In August 1986 Ireland devalued its currency, the punt, by 8% within the European Monetary System. Its 10-year yield rose from 10.96% that month to 13.90% by October.",
+"ev": "1986-08",
+"q": "The currency was devalued by 8%, and yields jumped by 3 points in two months.",
+"yo": true
+},
+{
+"c": "GB",
+"s": "1962-11",
+"t": "The pound in your pocket",
+"f": "In November 1967 Britain devalued the pound by 14%, from $2.80 to $2.40. Prime Minister Harold Wilson said the \"pound in your pocket\" had not been devalued.",
+"ev": "1967-11",
+"q": "The pound was devalued by 14%, and the prime minister said the \"pound in your pocket\" was unaffected.",
+"yo": true
+},
+{
+"c": "GB",
+"s": "1985-10",
+"t": "Britain joins the ERM",
+"f": "In October 1990 Britain joined the European Exchange Rate Mechanism. It left on Black Wednesday, less than two years later.",
+"ev": "1990-10",
+"q": "The country finally joined Europe's exchange-rate system, and would crash out of it within two years.",
+"yo": true
+},
+{
+"c": "GB",
+"s": "2004-03",
+"t": "Rates at 0.5% and QE",
+"f": "In March 2009 the Bank of England cut its rate to 0.5%, the lowest in its 315-year history, and began buying gilts with newly created money.",
+"ev": "2009-03",
+"q": "The central bank cut rates to the lowest in its 300-year history and started creating money to buy bonds.",
+"yo": true
+},
+{
+"c": "CH",
+"s": "2016-06",
+"t": "The SNB's first hike in 15 years",
+"f": "In June 2022 the Swiss National Bank raised rates for the first time in 15 years. The 10-year yield reached 1.15% that month, from -0.13% at the end of 2021.",
+"ev": "2022-06",
+"q": "The central bank raised rates for the first time in 15 years.",
+"yo": true
+},
+{
+"c": "SE",
+"s": "2004-07",
+"t": "The first negative rate",
+"f": "In July 2009 Sweden's central bank cut its deposit rate to -0.25%, the first central bank in the world to go below zero.",
+"ev": "2009-07",
+"q": "The central bank became the first in the world to set a negative interest rate.",
+"yo": true
+},
+{
+"c": "NO",
+"s": "1987-12",
+"t": "The krone floats",
+"f": "In December 1992 Norway let the krone float after a speculative attack. Its 10-year yield fell from 9.42% that month to 7.67% by March 1993.",
+"ev": "1992-12",
+"q": "After a speculative attack, the central bank gave up its currency peg and let it float.",
+"yo": true
+},
+{
+"c": "FI",
+"s": "1988-05",
+"t": "The markka devalued",
+"f": "In November 1991, in the middle of a deep depression, Finland devalued the markka by 12.3%.",
+"ev": "1991-11",
+"q": "In the middle of a deep depression, the currency was devalued by 12%.",
+"yo": true
+},
+{
+"c": "DK",
+"s": "1987-06",
+"t": "Denmark votes no",
+"f": "On June 2, 1992, Danish voters rejected the Maastricht Treaty with 50.7% of the vote, shaking Europe's currency markets.",
+"ev": "1992-06",
+"q": "Voters narrowly rejected a new European treaty.",
+"yo": true
+},
+{
+"c": "JP",
+"s": "1993-12",
+"t": "The Unken shock",
+"f": "In December 1998 the finance ministry's Trust Fund Bureau said it would stop buying government bonds. Japan's 10-year yield jumped from 0.88% in October to 2.12% in February 1999.",
+"ev": "1998-12",
+"q": "A huge government fund said it would stop buying government bonds, and the yield more than doubled in four months.",
+"yo": true
+},
+{
+"c": "JP",
+"s": "1998-06",
+"t": "The VaR shock",
+"f": "In June 2003 Japan's 10-year yield fell to 0.53%, a record low at the time, then nearly tripled to 1.41% by August as banks sold bonds.",
+"ev": "2003-06",
+"q": "The yield fell to a record low, then nearly tripled within two months as banks dumped bonds.",
+"yo": true
+},
+{
+"c": "JP",
+"s": "2016-06",
+"t": "The yield cap loosens",
+"f": "In December 2022 the Bank of Japan unexpectedly let its 10-year yield cap rise from 0.25% to 0.5%.",
+"ev": "2022-12",
+"q": "The central bank unexpectedly loosened the cap it held on the 10-year yield.",
+"yo": true
+},
+{
+"c": "JP",
+"s": "2016-09",
+"t": "Japan ends negative rates",
+"f": "In March 2024 the Bank of Japan ended eight years of negative interest rates with its first hike in 17 years. The 10-year yield rose from 0.72% that month to 1.07% in May.",
+"ev": "2024-03",
+"q": "The central bank ended eight years of negative rates with its first hike in 17 years.",
+"yo": true
+},
+{
+"c": "NZ",
+"s": "1985-03",
+"t": "The first inflation target",
+"f": "In March 1990 New Zealand's central bank signed the world's first formal inflation target, 0 to 2% by 1992. Dozens of countries later copied the model.",
+"ev": "1990-03",
+"q": "The central bank became the first in the world to work to a formal inflation target.",
+"yo": true
+},
+{
+"c": "ZA",
+"s": "2012-04",
+"t": "Gordhan fired, junk rating",
+"f": "At the end of March 2017 President Jacob Zuma fired finance minister Pravin Gordhan. Days later S&P cut South Africa's foreign-currency rating to junk.",
+"ev": "2017-04",
+"q": "The president fired a respected finance minister, and a rating agency cut the country to junk days later.",
+"yo": true
+},
+{
+"c": "HU",
+"s": "2003-10",
+"t": "Hungary's IMF rescue",
+"f": "In October 2008 Hungary became the first EU country to get an IMF rescue in the financial crisis, a $25 billion package with the EU and the World Bank. Its 10-year yield jumped from 7.99% in September to 9.57%.",
+"ev": "2008-10",
+"q": "It became the first EU country of the financial crisis to need an IMF rescue.",
+"yo": true
+},
+{
+"c": "RU",
+"s": "2008-06",
+"t": "The ruble crash",
+"f": "On December 16, 2014, as the ruble collapsed, Russia's central bank raised its key rate from 10.5% to 17% overnight.",
+"ev": "2014-12",
+"q": "With the currency collapsing, the central bank raised its key rate from 10.5% to 17% overnight.",
+"yo": true
+},
+{
+"c": "CZ",
+"s": "2016-06",
+"t": "Czech rates hit 7%",
+"f": "In June 2022 the Czech National Bank raised its main rate to 7%, the highest since 1999. The 10-year yield reached 5.12% that month.",
+"ev": "2022-06",
+"q": "The central bank raised its main rate to the highest level in more than 20 years.",
+"yo": true
+},
+{
+"c": "BE",
+"s": "1977-02",
+"t": "Belgium devalues",
+"f": "In February 1982 Belgium devalued its franc by 8.5%, its first devaluation in more than 30 years, and changed its wage indexation.",
+"ev": "1982-02",
+"q": "The currency was devalued for the first time in more than 30 years.",
+"yo": true
+},
+{
+"c": "AU",
+"s": "2015-03",
+"t": "Yield targeting down under",
+"f": "In March 2020 the Reserve Bank of Australia began targeting the 3-year bond yield at 0.25%, a first for the country.",
+"ev": "2020-03",
+"q": "The central bank started targeting a government bond yield directly, as Japan did.",
+"yo": true
+},
+{
+"c": "IN",
+"s": "2012-02",
+"t": "The rupee's record low",
+"f": "In August 2013 the rupee hit a record low as investors fled emerging markets after the Fed's taper talk. India's 10-year yield rose from 7.40% in June to 8.86% in November.",
+"ev": "2013-08",
+"q": "Talk of tighter money in America sent the currency to a record low.",
+"yo": true
+},
+{
+"c": "MX",
+"s": "2011-11",
+"t": "The Trump shock in Mexico",
+"f": "In November 2016 the peso tumbled after Donald Trump, who had promised to renegotiate NAFTA, won the US election. Mexico's 10-year yield rose from 6.09% in October to 7.60% in January.",
+"ev": "2016-11",
+"q": "An election result abroad sent the currency tumbling.",
+"yo": true
+},
+{
+"c": "PT",
+"s": "2006-03",
+"t": "Portugal's government falls",
+"f": "On March 23, 2011, Portugal's parliament rejected the government's austerity plan and Prime Minister José Sócrates resigned. Two weeks later Portugal asked for a bailout.",
+"ev": "2011-03",
+"q": "Parliament rejected an austerity plan, the prime minister resigned, and a bailout request followed within weeks.",
+"yo": true
+},
+{
+"c": "LV",
+"s": "2003-12",
+"t": "Latvia's rescue",
+"f": "In December 2008 Latvia agreed a €7.5 billion rescue from the EU, the IMF, its Nordic neighbors and others. Its economy shrank by about 14% in 2009.",
+"ev": "2008-12",
+"q": "The country agreed a €7.5 billion rescue from the EU, the IMF and its Nordic neighbors.",
+"yo": true
+},
+{
+"c": "MY",
+"s": "1993-09",
+"t": "Malaysia's capital controls",
+"f": "On 1 September 1998 Malaysia imposed capital controls and pegged the ringgit at 3.80 to the dollar, rather than turn to the IMF.",
+"ev": "1998-09",
+"q": "The government imposed capital controls and pegged the currency, rather than turn to the IMF.",
+"yo": true
 }
 ]

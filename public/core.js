@@ -93,7 +93,9 @@ function median(xs){ const a=[...xs].sort((p,q)=>p-q); return a[Math.floor(a.len
 // Variety rules: a country that was an answer can come back 3 days later (Monday, then Thursday); a new window
 // of the same country must start at least 3 years away from its windows of the last 30 days; no window with a
 // near-identical twin; a headline episode not reused within 30 days. Rules relax one by one only if nothing fits.
-const COOL = 3, OVERLAP = 36, HIST = 30, EP_GAP = 30;
+const COOL = 3, OVERLAP = 36, HIST = 30, EP_GAP = 30, EV_GAP = 40;
+// share of guess-the-year rounds built on a dated event (with a story); the rest mark a peak or a low
+const EVP = .7;
 const lookCache = {};
 function lookalike(k, s){ const key = k+":"+s; if(key in lookCache) return lookCache[key];
   const a = D.series[k]; let res = false;
@@ -139,9 +141,9 @@ function genTwist(r, used, type, ctx){
   }
   if(type === "year"){
     const roll = r();
-    if(roll < .4){ const evs = EPS.filter(e=>e.evi!=null && !used.has(e.c) && epOk(ctx, e, true));
+    if(roll < EVP){ const evs = EPS.filter(e=>e.evi!=null && !used.has(e.c) && epOk(ctx, e, true));
       if(evs.length){ const e = pick(r, evs); used.add(e.c); return {t:"year", k:"year", ym:"event", c:e.c, s:e.si, pk:e.evi, ep:e.i} } }
-    const low = roll >= .7, codes = [...EASY, ...MED].filter(k=>!used.has(k));
+    const low = roll >= EVP + (1-EVP)/2, codes = [...EASY, ...MED].filter(k=>!used.has(k));
     const ok = (k,s)=>{const a=D.series[k], p=low ? troughOf(a,s) : peakOf(a,s); if(p-s<6 || s+W-1-p<6) return false;
       const xs=[]; for(let i=s;i<s+W;i++) if(a[i]!=null) xs.push(a[i]); return low ? median(xs)-a[p] >= 1 : a[p]-median(xs) >= 1.5};
     const w = pickWin(r, codes, 0, CUT, ok, ctx);
@@ -183,14 +185,16 @@ function buildPlan(seed, n, ctx){
 // daily plans are built in order from day 1, so each day knows what came before
 const PLANS = [];
 function ctxOf(entries, coolFrom){ const ctx = {cool:new Set(), wins:{}, eps:new Set()};
-  for(const h of entries){ (ctx.wins[h.c] ||= []).push(h.s); if(h.d >= coolFrom) ctx.cool.add(h.c); if(h.ep != null && h.epd) ctx.eps.add(h.ep) }
+  for(const h of entries){ if(!h.old){ (ctx.wins[h.c] ||= []).push(h.s); if(h.d >= coolFrom) ctx.cool.add(h.c) } if(h.ep != null && h.epd) ctx.eps.add(h.ep) }
   return ctx }
-function answersOf(rounds, d){ return rounds.filter(x=>x.c).map(x=>({c:x.c, s:x.s, d, ep:x.ep, epd:true})) }
+function answersOf(rounds, d){ return rounds.filter(x=>x.c).map(x=>({c:x.c, s:x.s, d, ep:x.ep, epd:true, yr:x.t === "year"})) }
 function dailyPlan(n){
   n = Math.max(1, n);
   for(let d=1; d<=n; d++){ if(PLANS[d]) continue;
     if(FROZEN[d]){ PLANS[d] = decodePlan(FROZEN[d]); continue }
-    const ent = []; for(let e=Math.max(1, d-HIST); e<d; e++) for(const h of answersOf(PLANS[e], e)) ent.push({...h, epd: h.ep != null && e >= d-EP_GAP});
+    // a dated event used in a year round stays out for EV_GAP days; days older than HIST only count for that
+    const ent = []; for(let e=Math.max(1, d-Math.max(HIST, EV_GAP)); e<d; e++) for(const h of answersOf(PLANS[e], e))
+      ent.push({...h, old: e < d-HIST, epd: h.ep != null && e >= d-(h.yr ? EV_GAP : EP_GAP)});
     PLANS[d] = buildPlan("sovspreadle-day-"+d, d, ctxOf(ent, d-COOL+1)) }
   return PLANS[n];
 }

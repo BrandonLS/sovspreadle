@@ -78,6 +78,9 @@ function playFinale(){ const m = $("endMascot"), bull = rungOf(sess.score) >= 5,
   w.classList.remove("rear","roar"); void w.getBoundingClientRect(); w.classList.add(bull ? "rear" : "roar"); finaleSound(bull) }
 
 // notes cover a country and a period; one shows when the window covers enough of that period
+// "Elsewhere that month": what another big borrower paid in the marked month (Germany, or the US for Germany)
+function elseOf(r){ for(const k of (r.c === "DE" ? ["US","GB"] : ["DE","US","GB"])){ const v = D.series[k] && D.series[k][r.pk];
+    if(k !== r.c && v != null && !isEst(k, r.pk)) return `${name(k)}'s 10-year yield was ${fmt(v)}` } return null }
 // a short note with a date-free hint (h) can tell the story of a peak or low in a guess-the-year round
 function storyNote(r){ if(r.t !== "year" || r.ep != null) return -1;
   return NOTES.findIndex(n=>n.c === r.c && n.h && ix(n.a) <= r.pk && r.pk <= ix(n.b) && ix(n.b) - ix(n.a) <= 12) }
@@ -400,6 +403,7 @@ function renderRound(){
     q = ep ? `${name(r.c)}: in what year was the marked moment?` : `${name(r.c)}: in what year did the marked ${r.ym === "low" ? "low" : "peak"} happen?`;
     facts = [["Instrument", `${name(r.c)}'s 10-year yield`], ["Window", done ? winTxt : "10 years, dates hidden"], ["Marked point", done ? `${fmt(D.series[r.c][r.pk])}, ${mlong(r.pk)}` : fmt(D.series[r.c][r.pk])], ["Decade", s.h.includes("decade")||done ? `${Math.floor(yearOf(r.pk)/10)*10}s` : null]];
     const sn = ep ? -1 : storyNote(r), story = ep ? ep.q.replace(/^The marked point is /, "").replace(/^./, c=>c.toUpperCase()) : sn >= 0 ? NOTES[sn].h : null;
+    const els = elseOf(r); if(els) facts.push(["Elsewhere that month", s.h.includes("else")||done ? els : null]);
     if(story) facts.push(["The story", s.h.includes("story")||done ? story : null]);
   } else {
     const qi = Math.min(viewQ, r.qs.length-1), qq = r.qs[qi];
@@ -431,14 +435,14 @@ function renderRound(){
     renderSugg();
   }
   // hints
-  const hs = r.t === "year" ? [["decade","Decade"], ...(r.ep != null || storyNote(r) >= 0 ? [["story","The story"]] : [])] : isHL ? [] : [["region","Region"],["twin","Closest twin"],["zoom","Zoom out 5 years"]];
+  const hs = r.t === "year" ? [["decade","Decade"], ...(elseOf(r) ? [["else","Elsewhere that month"]] : []), ...(r.ep != null || storyNote(r) >= 0 ? [["story","The story"]] : [])] : isHL ? [] : [["region","Region"],["twin","Closest twin"],["zoom","Zoom out 5 years"]];
   $("hints").hidden = done || !hs.length;
   const canHint = s.seq.length < COUPONS-1;
   $("hints").innerHTML = hs.length ? `<span>${canHint ? "A hint costs one coupon:" : "Keep your last coupon for a guess."}</span>` + hs.map(([k,l])=>`<button type="button" data-h="${k}" ${s.h.includes(k)||!canHint||(k==="twin"&&!tw)?"disabled":""} ${k==="twin"&&!tw?'title="No other country moved closely enough with this one"':""}><svg aria-hidden="true"><use href="#coin"/></svg>${l}</button>`).join("") : "";
 
   // coupons
   let h = "";
-  const HN = {region:"Region", twin:"Closest twin", zoom:"Zoom out 5 years", decade:"Decade", story:"The story"};
+  const HN = {region:"Region", twin:"Closest twin", zoom:"Zoom out 5 years", decade:"Decade", else:"Elsewhere that month", story:"The story"};
   for(let i=0;i<(isHL ? QS : COUPONS);i++){
     const e = isHL ? (s.g[i] != null ? {k:"g", v:s.g[i]} : null) : s.seq[i], g = e && e.k === "g" ? e.v : null;
     if(e && e.k === "p"){ h += `<li class="coupon used"><div class="no">Coupon ${i+1}</div><div class="who"><span class="seal" style="--c:${TIERC[3]}"></span>Passed</div><div class="nums"><span class="nd">Counted as a miss</span></div></li>`; continue }
