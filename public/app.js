@@ -44,7 +44,7 @@ const SONG = {bpm:112, prog:["Dm7","G7","Cmaj7","Am7","Dm7","G7","Cmaj7","Am7"],
   ch:{Dm7:[38,62,65,69,72], G7:[43,59,62,65,69], Cmaj7:[36,60,64,67,71], Am7:[45,60,64,67,69]},
   mel:[[[0,77,4],[4,81,2],[6,84,6],[12,81,4]],[[0,83,4],[4,79,2],[6,77,2],[8,74,8]],[[0,76,4],[4,79,4],[8,83,4],[12,84,4]],[[0,81,6],[6,79,2],[8,76,8]],
        [[0,77,4],[4,81,2],[6,84,6],[12,86,4]],[[0,83,4],[4,79,2],[6,77,2],[8,74,8]],[[0,76,4],[4,79,4],[8,83,4],[12,88,4]],[[0,84,4],[4,83,4],[8,79,8]]]};
-const MUS_VOL = .4; // background music level (was .5)
+const MUS_VOL = .28; // background music level
 let musTimer = null, musNext = 0, musStep = 0, musBus = null, pulses = null, noiseBuf = null;
 const mtof = m => 440*Math.pow(2,(m-69)/12);
 function chipSetup(c){ if(pulses) return; pulses = {};
