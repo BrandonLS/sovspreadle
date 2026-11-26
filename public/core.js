@@ -152,8 +152,9 @@ function genTwist(r, used, type, ctx, must){
     const w = pickWin(r, codes, 0, CUT, ok, ctx);
     if(w){used.add(w.c); const a = D.series[w.c]; return {t:"year", k:"year", ym: low ? "low" : "peak", c:w.c, s:w.s, pk: low ? troughOf(a, w.s) : peakOf(a, w.s)}}
   }
-  // higher or lower: three months, two countries each, close enough to need thought
-  const lo = ix("1985-01"), span = CUT-lo, qs = [];
+  // higher or lower: three months, two countries each. The gap between the two narrows question by question:
+  // 2 to 6 points, then 1 to 2, then 0.5 to 1, so the first is a warm-up and none is a coin toss.
+  const lo = ix("1985-01"), span = CUT-lo, qs = [], GAPS = [[2,6],[1,2],[.5,1]];
   for(let q=0;q<3;q++){
     let got = null;
     for(let tries=0; tries<300 && !got; tries++){
@@ -162,7 +163,7 @@ function genTwist(r, used, type, ctx, must){
       if(pool.length < 2) continue;
       const a = pick(r, pool); let b = pick(r, pool); if(a===b) continue;
       const d = Math.abs(D.series[a][m]-D.series[b][m]);
-      if(d >= .05 && d <= (tries<200 ? .4 : 1.2)) got = {m, a, b};
+      const [g0, g1] = GAPS[q]; if(tries < 200 ? d >= g0 && d <= g1 : d >= g0*.6 && d <= g1*1.5) got = {m, a, b};
     }
     if(got) qs.push(got);
   }
