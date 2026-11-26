@@ -38,30 +38,39 @@ const SFX = {
   ding(){const c=ac(); if(!c||!prefs.snd) return; const t=c.currentTime+.01; tone(1568,t,.14,.5); tone(2093,t+.07,.1,.6)},
   click(){const c=ac(); if(!c||!prefs.snd) return; noise(c.currentTime+.005,.015,.08,"highpass",2500)}
 };
-/* ragtime loop: oom-pah left hand, syncopated right hand; C | C | F | F | C | G7 | C | G7 */
-const SONG = (()=>{const B={C:[48,43,[60,64,67]],F:[41,48,[57,60,65]],G:[43,50,[59,62,65]]};
-  const prog=["C","C","F","F","C","G","C","G"];
-  const mel=[[[0,76],[3,79],[6,84]],[[0,83],[2,84],[3,88],[6,86]],[[0,84],[3,81],[6,77]],[[0,81],[2,79],[3,77],[6,74]],[[0,76],[3,79],[6,88]],[[0,86],[2,83],[3,79],[6,77]],[[0,76],[3,72],[6,79]],[[0,77],[2,76],[3,74],[6,71]]];
-  return {B,prog,mel}})();
-let musTimer = null, musNext = 0, musStep = 0, musBus = null;
+/* "Ticker tape": a mellow 8-bit loop at 112 BPM. Soft 25% pulse lead, triangle bass, pulse arpeggios, noise drums.
+   Dm7 | G7 | Cmaj7 | Am7, twice, the second time with a lifted ending. Steps are sixteenth notes. */
+const SONG = {bpm:112, prog:["Dm7","G7","Cmaj7","Am7","Dm7","G7","Cmaj7","Am7"],
+  ch:{Dm7:[38,62,65,69,72], G7:[43,59,62,65,69], Cmaj7:[36,60,64,67,71], Am7:[45,60,64,67,69]},
+  mel:[[[0,77,4],[4,81,2],[6,84,6],[12,81,4]],[[0,83,4],[4,79,2],[6,77,2],[8,74,8]],[[0,76,4],[4,79,4],[8,83,4],[12,84,4]],[[0,81,6],[6,79,2],[8,76,8]],
+       [[0,77,4],[4,81,2],[6,84,6],[12,86,4]],[[0,83,4],[4,79,2],[6,77,2],[8,74,8]],[[0,76,4],[4,79,4],[8,83,4],[12,88,4]],[[0,84,4],[4,83,4],[8,79,8]]]};
+const MUS_VOL = .4; // background music level (was .5)
+let musTimer = null, musNext = 0, musStep = 0, musBus = null, pulses = null, noiseBuf = null;
 const mtof = m => 440*Math.pow(2,(m-69)/12);
-function pianoNote(m, t, v, d){const c=actx; const g=c.createGain(); env(g,t,.006,v,d); const f=c.createBiquadFilter(); f.type="lowpass"; f.frequency.value=2600; g.connect(f); f.connect(musBus);
-  const o1=c.createOscillator(); o1.type="triangle"; o1.frequency.value=mtof(m); const o2=c.createOscillator(); o2.type="sine"; o2.frequency.value=mtof(m)*2; const g2=c.createGain(); g2.gain.value=.35;
-  o1.connect(g); o2.connect(g2); g2.connect(g); o1.start(t); o2.start(t); o1.stop(t+d+.05); o2.stop(t+d+.05)}
-function musicStart(){const c=ac(); if(!c) return; if(!musBus){musBus=c.createGain(); musBus.gain.value=.5; musBus.connect(master)}
+function chipSetup(c){ if(pulses) return; pulses = {};
+  [.125,.25,.5].forEach(d=>{const n=32, re=new Float32Array(n), im=new Float32Array(n); for(let k=1;k<n;k++) re[k]=(2/(k*Math.PI))*Math.sin(k*Math.PI*d); pulses[d]=c.createPeriodicWave(re,im)});
+  noiseBuf = c.createBuffer(1, c.sampleRate*.5, c.sampleRate); const x = noiseBuf.getChannelData(0); for(let i=0;i<x.length;i++) x[i]=Math.random()*2-1 }
+function chipNote(m, t, d, v, duty){const c=actx, o=c.createOscillator(), g=c.createGain(); if(duty) o.setPeriodicWave(pulses[duty]); else o.type="triangle";
+  o.frequency.value=mtof(m); g.gain.setValueAtTime(v,t); g.gain.setValueAtTime(v,t+d*.85); g.gain.linearRampToValueAtTime(.0001,t+d); o.connect(g); g.connect(musBus); o.start(t); o.stop(t+d+.02)}
+function chipNoise(t, d, v, f, hp){const c=actx, s=c.createBufferSource(), fl=c.createBiquadFilter(), g=c.createGain(); s.buffer=noiseBuf; fl.type=hp?"highpass":"bandpass"; fl.frequency.value=f;
+  g.gain.setValueAtTime(v,t); g.gain.exponentialRampToValueAtTime(.0001,t+d); s.connect(fl); fl.connect(g); g.connect(musBus); s.start(t); s.stop(t+d+.02)}
+function chipKick(t, v){const c=actx, o=c.createOscillator(), g=c.createGain(); o.type="triangle"; o.frequency.setValueAtTime(160,t); o.frequency.exponentialRampToValueAtTime(45,t+.1);
+  g.gain.setValueAtTime(v,t); g.gain.exponentialRampToValueAtTime(.0001,t+.14); o.connect(g); g.connect(musBus); o.start(t); o.stop(t+.16)}
+function musicStart(){const c=ac(); if(!c) return; if(!musBus){musBus=c.createGain(); musBus.gain.value=MUS_VOL; musBus.connect(master)} chipSetup(c);
   musNext=c.currentTime+.1; musStep=0; clearInterval(musTimer);
-  musTimer=setInterval(()=>{const st=.15; while(musNext < actx.currentTime+.35){
-    const bar=Math.floor(musStep/8)%8, s=musStep%8, ch=SONG.B[SONG.prog[bar]];
-    if(s===0) pianoNote(ch[0],musNext,.16,.45); if(s===4) pianoNote(ch[1],musNext,.14,.45);
-    if(s===2||s===6) ch[2].forEach(n=>pianoNote(n,musNext,.06,.25));
-    SONG.mel[bar].forEach(([p,n])=>{if(p===s) pianoNote(n,musNext,.11,.4)});
-    musNext+=st; musStep++}},90)}
+  musTimer=setInterval(()=>{const dt=60/SONG.bpm/4; while(musNext < actx.currentTime+.3){
+    const bar=Math.floor(musStep/16)%8, s=musStep%16, ch=SONG.ch[SONG.prog[bar]], tones=ch.slice(1);
+    if(s%4===0) chipNote(ch[0]+[0,7,12,10][s/4], musNext, dt*3.6, .13);
+    chipNote(tones[s%tones.length]+12, musNext, dt*.8, .035, .25);
+    SONG.mel[bar].forEach(([p,m,l])=>{if(p===s) chipNote(m, musNext, dt*l, .09, .25)});
+    if(s===0||s===10) chipKick(musNext,.35); if(s%8===4) chipNoise(musNext,.05,.12,3000); if(s%4===2) chipNoise(musNext,.03,.05,8000,true);
+    musNext+=dt; musStep++}},40)}
 function musicStop(){clearInterval(musTimer); musTimer=null}
 /* end-of-session finale: a bellow for the bull, a growl for the bear */
 function finaleSound(bull){const c=ac(); if(!c||!prefs.snd) return;
-  if(!musBus){musBus=c.createGain(); musBus.gain.value=.5; musBus.connect(master)}
+  if(!musBus){musBus=c.createGain(); musBus.gain.value=MUS_VOL; musBus.connect(master)}
   const t=c.currentTime+.05;
-  if(musTimer){musBus.gain.setTargetAtTime(.12,c.currentTime,.05); musBus.gain.setTargetAtTime(.5,t+(bull?1.5:1),.3)}
+  if(musTimer){musBus.gain.setTargetAtTime(MUS_VOL*.24,c.currentTime,.05); musBus.gain.setTargetAtTime(MUS_VOL,t+(bull?1.5:1),.3)}
   if(bull){ // a deep bull bellow: a low "mmm" opening into "OOO", with a sub-octave underneath
     const d=1.4, lp=c.createBiquadFilter(); lp.type="lowpass"; lp.Q.value=4;
     lp.frequency.setValueAtTime(200,t); lp.frequency.linearRampToValueAtTime(720,t+d*.35); lp.frequency.linearRampToValueAtTime(460,t+d);
