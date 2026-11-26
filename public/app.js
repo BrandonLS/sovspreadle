@@ -221,8 +221,11 @@ function answerHL(code){
   } else {right ? SFX.ding() : SFX.bonk(); save(); render()}
 }
 function useHint(type){
-  const s = rs(); if(s.done || s.h.includes(type) || s.seq.length >= COUPONS-1) return;
-  s.h.push(type); s.seq.push({k:"h", v:type}); SFX.click(); save(); render();
+  // the first hint on each bond is free (no coupon); later hints cost one, and the last coupon stays for a guess
+  const s = rs(); if(s.done || s.h.includes(type)) return;
+  if(!s.h.length){ s.h.push(type); s.fh = type }
+  else { if(s.seq.length >= COUPONS-1) return; s.h.push(type); s.seq.push({k:"h", v:type}) }
+  SFX.click(); save(); render();
 }
 function nextRound(){ resetPass();
   if(sess.cur >= ROUNDS-1){ openEnd(true); return }
@@ -446,8 +449,9 @@ function renderRound(){
   // hints
   const hs = r.t === "year" ? [["decade","Decade"], ...(elseOf(r) ? [["else","Elsewhere that month"]] : []), ...(r.ep != null || storyNote(r) >= 0 ? [["story","The story"]] : [])] : isHL ? [] : [["region","Region"],["twin","Closest twin"],["zoom","Zoom out 5 years"]];
   $("hints").hidden = done || !hs.length;
-  const canHint = s.seq.length < COUPONS-1;
-  $("hints").innerHTML = hs.length ? `<span>${canHint ? "A hint costs one coupon:" : "Keep your last coupon for a guess."}</span>` + hs.map(([k,l])=>`<button type="button" data-h="${k}" ${s.h.includes(k)||!canHint||(k==="twin"&&!tw)?"disabled":""} ${k==="twin"&&!tw?'title="No other country moved closely enough with this one"':""}><svg aria-hidden="true"><use href="#coin"/></svg>${l}</button>`).join("") : "";
+  const free = !s.h.length, canHint = free || s.seq.length < COUPONS-1;
+  const hintLbl = free ? "Your first hint is free:" : !canHint ? "Keep your last coupon for a guess." : s.fh ? "Free hint used. More hints cost one coupon each:" : "A hint costs one coupon:";
+  $("hints").innerHTML = hs.length ? `<span>${hintLbl}</span>` + hs.map(([k,l])=>`<button type="button" data-h="${k}" ${s.h.includes(k)||!canHint||(k==="twin"&&!tw)?"disabled":""} ${k==="twin"&&!tw?'title="No other country moved closely enough with this one"':""}><svg aria-hidden="true"><use href="#coin"/></svg>${l}</button>`).join("") : "";
 
   // coupons
   let h = "";

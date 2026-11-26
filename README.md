@@ -9,7 +9,7 @@ Play it at **https://sovspreadle.app**.
 
 - **Five bonds a day**, the same for everyone. A new set starts at midnight, your local time.
 - **Each bond is a 10-year window** of monthly yields. Type a country to guess.
-- **You have five coupons per bond.** Every guess and every hint uses one.
+- **You have five coupons per bond.** Every guess uses one, and so does every hint after the first, which is free.
 - **Wrong guesses still help.** Your guess is drawn as a dashed line on the chart, with how far it was from the
   answer in basis points and how similar its shape was.
 - **Hints:** the region, the country that moved most like the answer, or five more years on each side of the window.
